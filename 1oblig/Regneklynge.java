@@ -5,6 +5,7 @@ class Regneklynge {
     public int maxNoderPerRack = 12; // Endre senere; lest fra fil.
     public int giMinne = 32; // Endre; lese fra fil
     public int giPros = 1;
+    public ArrayList<Rack> rackListe;  // Bruker ArrayList fordi antall rack ikke er fastsatt, og potensielt uendelig.
     /* metoder til arraylist
     add()
       rackListe.add(new Rack(asdasdasd,asdasdasd))
@@ -12,9 +13,8 @@ class Regneklynge {
     remove()
     size()
     */
-    ArrayList<Rack> rackListe;  // Bruker ArrayList fordi antall rack ikke er fastsatt, og potensielt uendelig.
     public Regneklynge(){ // Kontruktør
-      rackListe = new ArrayList<Rack>();
+      rackListe = new ArrayList<Rack>(); // Setter rackList lik nytt ArrayList med Rack-objekter.
       rackListe.add(new Rack(maxNoderPerRack)); // Ett rack blir opprettet samtidig som en regneklyngen.
     }
 
@@ -22,7 +22,7 @@ class Regneklynge {
       rackListe.add(new Rack(maxNoderPerRack)); // Oppretter nytt tomt rack og legger det til rackList.
     }
 
-    public void settInnNode(int giMinne, int giPros){ // Node opprettes og settes inn i passende rack i regneklyngen.
+    public void settInnNode(){ // Node opprettes og settes inn i passende rack i regneklyngen.
       if (!rackListe.get(rackListe.size()-1).erFull()) { // Hvis det siste racket ikke er fullt.
         rackListe.settInnNode(giMinne, giPros); // Node blir satt inn.
       } else {

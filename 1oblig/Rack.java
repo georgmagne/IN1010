@@ -1,6 +1,6 @@
 public class Rack {
 
-  Node[] nodeListe; // Velger array fremfor arraylist, trenger ikke dynamisk lengde fordi max noder er angitt.
+  public Node[] nodeListe; // Velger array fremfor arraylist, trenger ikke dynamisk lengde fordi max noder er angitt.
 
   public Rack(int maxNoderPerRack){ // Konstruktør
     nodeListe = new Node[maxNoderPerRack];
@@ -24,19 +24,6 @@ public class Rack {
     }
     return true;
   }
-
-/*  public boolean erTom(Node[] nodeListe){
-
-  }
-*/
-/*
-  public int antallNoder(){
-    int antall = 0;
-    for (int i=0; i < nodeListe.length; i++){
-
-    }
-  }
-*/
   public int noderMedNokMinne(int nokMinne){
     int antall = 0;
 
@@ -47,5 +34,18 @@ public class Rack {
     }
     return antall;
   }
+
+  /*  public boolean erTom(Node[] nodeListe){
+
+}
+*/
+/*
+public int antallNoder(){
+int antall = 0;
+for (int i=0; i < nodeListe.length; i++){
+
+}
+}
+*/
 
 }
