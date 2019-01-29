@@ -1,0 +1,10 @@
+boolean b er false -- int x er 0.
+
+b && x == 0; Evaluerer til false, fordi b = false // a && b, sjekker kun b hvis a er true.
+b || x == 0; Evaluerer til true, fordi x == 0 // b || x, er en or-oprasjon.
+!b || x == 0; Evaluerer til true, fordi x == 0. // Se kommentar over.
+!b && x == 0; Evaluerer til true, fordi x == 0. // !b && x, sjekker først !b, som er true.
+b && x != 0; Evaluerer til false, fordi b = false. // And-oprasjonene går ikke videre.
+b || x != 0; Evaluerer til true, fordi b != 0.
+!b && x != 0; Evaluerer til false, fordi x = 0.
+!b || x != 0; Evaluerer til true, fordi !b != 0.

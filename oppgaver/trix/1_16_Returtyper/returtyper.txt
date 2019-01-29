@@ -1,0 +1,28 @@
+a)
+[returtype] jegReturnererIngenting() {
+}
+// [returtype] : void
+
+b)
+[returtype] summenAvToHeltall() {
+   int a = 2;
+   int b = 3;
+   return a + b;
+}
+// [returtype] : int
+
+c)
+[returType] summenAvToFlyttall(){
+   double a = 2.0;
+   double b = 3.0;
+   return a + b;
+}
+// public double
+
+d)
+[returtype] navnetTilBrukeren(){
+   Scanner tastatur = new Scanner(System.in);
+   String navn = tastatur.nextLine();
+   return navn;
+}
+// [returtype] : String

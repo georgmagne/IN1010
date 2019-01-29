@@ -1,0 +1,46 @@
+class Test {
+ public static void main(String[] args) {
+     int jens;
+     int siv = Jens * 3;
+     System.out.println("Svar: " siv);
+     erna = siv - jens;
+     System.out.printn(erna);
+ }
+
+a)
+Test.java:8: reached end of file while parsing
+     }
+      ^
+// Mangler avsluttende {} på classen
+
+b) og c)
+Test.java:4: cannot find symbol
+   symbol : variable Jens
+   location: class Test
+    int siv = Jens * 3;
+              ^
+// Variabelen er ikke definert på forhånd, Jens og jens er ikke samme variabel
+
+d) Test.java:5: ’)’ expected
+    System.out.println("Svar: " siv);
+                               ^
+   Test.java:5: illegal start of expression
+    System.out.println("Svar: " siv);
+
+// Må a '+' mellom stringen og variabelen
+
+
+e) Test.java:6: cannot find symbol
+   symbol : variable erna
+   location: class Test
+    erna = siv - jens;
+    ^
+// erna er ikke en deklarert variabel
+
+
+f) Test.java:7: cannot find symbol
+   symbol : method printn(int)
+   location: class java.io.PrintStream
+    System.out.printn(erna);
+              ^
+// printn skal nok være println, printn fins ikke i java.
