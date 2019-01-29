@@ -1,1 +1,2 @@
 Dette er en testfil for git sync.
+Legge til litt tekst til testfilen.
