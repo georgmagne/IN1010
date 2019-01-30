@@ -14,17 +14,4 @@ public class Node{
   public boolean nokMinne(int paakrevdMinne){
     return (minne >= paakrevdMinne);
   }
-
-/*
-  public getMinne(){ //Returnerer antall minne.
-    ...
-  }
-*/
-
-/*
-  public getPros(){ // Returnerer antall prosessorer
-    ...
-  }
-*/
-
 }
