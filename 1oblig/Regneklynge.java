@@ -3,17 +3,12 @@ import java.util.ArrayList;
 class Regneklynge {
 
     public int maxNoderPerRack = 12; // Endre senere; lest fra fil.
-    public int giMinne = 32; // Endre; lese fra fil
-    public int giPros = 1;
     public ArrayList<Rack> rackListe = new ArrayList<Rack>();  // Bruker ArrayList fordi antall rack ikke er fastsatt, og potensielt uendelig.
-    public Node node = new Node(giMinne, giPros); // Må endres; kun for test.
-    /* metoder til arraylist
-    add()
-      rackListe.add(new Rack(asdasdasd,asdasdasd))
-    get()
-    remove()
-    size()
-    */
+
+    // public int giMinne = 32; // Endre; lese fra fil
+    // public int giPros = 1;
+    // public Node node = new Node(giMinne, giPros); // Må endres; kun for test.
+
     public Regneklynge(){ // Kontruktør
       rackListe = new ArrayList<Rack>(); // Setter rackListe lik nytt ArrayList med Rack-objekter.
       rackListe.add(new Rack(maxNoderPerRack)); // Ett rack blir opprettet samtidig som regneklyngen.
@@ -23,7 +18,7 @@ class Regneklynge {
       rackListe.add(new Rack(maxNoderPerRack)); // Oppretter nytt tomt rack og legger det til rackListe.
     }
 
-    public void settInnNode(){ // Node opprettes og settes inn i passende rack i regneklyngen.
+    public void settInnNode(Node node){ // Node opprettes og settes inn i passende rack i regneklyngen.
       if (!rackListe.get(rackListe.size()-1).erFull()) { // Hvis det siste racket ikke er fullt.
         rackListe.get(rackListe.size()-1).settInn(node); // Node blir satt inn i siste element i rackListe
       } else { // Hvis alle rack i rackListe er fulle.
@@ -41,11 +36,17 @@ class Regneklynge {
 
     }
 
-    public void antTotProsessorer(){ // Returnerer antall prosessorer i regneklyngen.
+    public int antTotProsessorer(){ // Returnerer antall prosessorer i regneklyngen.
       int totPros = 0; // Prosessor teller.
-      for (Rack elem: rackListe){ // Hvert rack i rackListe.
+
+      for (int i = 0; i < rackListe.size(); i++){
+        totPros += rackListe.get(i).antProsessorer();
+      }
+
+      for (Rack elem : rackListe){ // Hvert rack i rackListe.
         totPros += elem.antProsessorer(); // Legger til retur-verdiene til alle rack.antProsessorer() til totPros.
         }
+      return totPros;
       }
 
     public int getAntRack(){
