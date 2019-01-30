@@ -1,6 +1,6 @@
 public class Rack {
 
-  public Node[] nodeListe; // Velger array fremfor arraylist, trenger ikke dynamisk lengde fordi max noder er angitt.
+  Node[] nodeListe; // Velger array fremfor arraylist, trenger ikke dynamisk lengde fordi max noder er angitt.
 
   public Rack(int maxNoderPerRack){ // Konstruktør
     nodeListe = new Node[maxNoderPerRack]; // Setter lengden til nodeListe lik maxNoderPerRack.

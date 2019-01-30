@@ -1,6 +1,6 @@
 public class Node{
-  public int minne;
-  public int antPros;
+  int minne;
+  int antPros;
 
   public Node(int giMinne, int giAntPros){ //Kontruktør
     minne = giMinne; // Instansvariabler

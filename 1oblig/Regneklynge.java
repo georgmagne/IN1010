@@ -2,11 +2,12 @@ import java.util.ArrayList;
 
 class Regneklynge {
 
-  public int maxNoderPerRack = 12; // Endre senere; lest fra fil.
-  public ArrayList<Rack> rackListe = new ArrayList<Rack>();  // Bruker ArrayList fordi antall rack ikke er fastsatt, og potensielt uendelig.
+  ArrayList<Rack> rackListe = new ArrayList<Rack>();  // Bruker ArrayList fordi antall rack ikke er fastsatt, og potensielt uendelig.
+  int maxNoderPerRack; // Initialisering av instansvariabel.
 
-  public Regneklynge(){ // Kontruktør
+  public Regneklynge(int giMaxNoderPerRack){ // Kontruktør
     rackListe = new ArrayList<Rack>(); // Setter rackListe lik nytt ArrayList med Rack-objekter.
+    maxNoderPerRack = giMaxNoderPerRack; // Gir instansvariabelen en verdi fra parameteret.
     rackListe.add(new Rack(maxNoderPerRack)); // Ett rack blir opprettet samtidig som regneklyngen.
   }
 

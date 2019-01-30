@@ -1,6 +1,6 @@
 class Main{
   public static void main(String[] args) {
-    Regneklynge abel = new Regneklynge(); // Oppretter en Regneklynge kallt abel.
+    Regneklynge abel = new Regneklynge(12); // Oppretter en Regneklynge kallt abel.
 
     for (int i = 0; i < 650; i++) { // Kjøres 650 ganger, og legger til en node hver gang.
       abel.settInnNode(new Node(64, 1)); // Node med 64GB og en Prosessor blir satt inn.
