@@ -36,6 +36,14 @@ public class Rack {
     return antall; // Etter at alle nodene  er sjekket.
   }
 
+  public int antProsessorer(){
+    int antPros = 0;
+    for (Node elem: nodeListe){ // For hver Node i nodeListe.
+      antPros += elem.getPros(); // legger til return-verdien til node.getPros().
+    }
+    return antPros; // Returnerer totale prosessorer i racket.
+  }
+
   /*  public boolean erTom(Node[] nodeListe){
 
 }
