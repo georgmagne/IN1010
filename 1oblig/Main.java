@@ -10,10 +10,10 @@ class Main{
       abel.settInnNode(new Node(1024, 2));
     }
 
-    //System.out.println("Antall prosessorer: " + abel.antTotProsessorer());
-    //System.out.println("Noder med minst 64GB: " + abel.noderMedNokMinne(64));
-    //System.out.println("Noder med minst 32GB: " + abel.noderMedNokMinne(32));
-    //System.out.println("Noder med minst 128GB: " + abel.noderMedNokMinne(128));
+    System.out.println("Antall prosessorer: " + abel.antTotProsessorer());
+    System.out.println("Noder med minst 64GB: " + abel.noderMedNokMinne(64));
+    System.out.println("Noder med minst 32GB: " + abel.noderMedNokMinne(32));
+    System.out.println("Noder med minst 128GB: " + abel.noderMedNokMinne(128));
 
     System.out.println("Antall racks: " + abel.getAntRack()); // Ok
   }
