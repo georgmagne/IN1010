@@ -37,19 +37,18 @@ class Regneklynge {
       for (Rack elem: rackListe){
         totNoderNokMinne += elem.noderMedNokMinne(nokMinne);
       }
+      return totNoderNokMinne;
 
     }
 
-    public int antProsessorer(){ // Returnerer antall prosessorer i regneklyngen.
+    public void antTotProsessorer(){ // Returnerer antall prosessorer i regneklyngen.
       int totPros = 0; // Prosessor teller.
       for (Rack elem: rackListe){ // Hvert rack i rackListe.
-        for (Node n: elem){ // Hver node i rack.
-          totPros += n.getPros(); // Legger til Noden sitt antall prosessorer.
+        totPros += elem.antProsessorer(); // Legger til retur-verdiene til alle rack.antProsessorer() til totPros.
         }
       }
-  }
 
     public int getAntRack(){
-      return rackliste.size(); // Antall rack i Regneklynge.
+      return rackListe.size(); // Antall rack i Regneklynge.
     }
 }
