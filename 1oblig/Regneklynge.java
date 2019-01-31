@@ -1,3 +1,5 @@
+import java.io.File;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 class Regneklynge {
@@ -5,10 +7,34 @@ class Regneklynge {
   ArrayList<Rack> rackListe = new ArrayList<Rack>();  // Bruker ArrayList fordi antall rack ikke er fastsatt, og potensielt uendelig.
   int maxNoderPerRack; // Initialisering av instansvariabel.
 
-  public Regneklynge(int giMaxNoderPerRack){ // Kontruktør
+
+  public Regneklynge(String filnavn) throws Exception { // Kontruktør
     rackListe = new ArrayList<Rack>(); // Setter rackListe lik nytt ArrayList med Rack-objekter.
-    maxNoderPerRack = giMaxNoderPerRack; // Gir instansvariabelen en verdi fra parameteret.
+
+    Scanner fil = new Scanner(new File(filnavn));
+    String sMaxNoderPerRack = fil.nextLine();
+    maxNoderPerRack = Integer.parseInt(sMaxNoderPerRack); // Første linje i filen. Henviser til max antall noder i rack.
     rackListe.add(new Rack(maxNoderPerRack)); // Ett rack blir opprettet samtidig som regneklyngen.
+
+    while (fil.hasNextInt()){ // Så lenge fil har en int til.
+
+      String linjer = fil.nextLine();
+      String[] biter = linjer.split(" ");
+
+      String sLagAntNoder = biter[0];
+      String sMinne = biter[1];
+      String sProsessor = biter[2];
+
+      int lagAntNoder = Integer.parseInt(sLagAntNoder);
+      int minne = Integer.parseInt(sMinne);
+      int prosessor = Integer.parseInt(sProsessor);
+
+
+      for (int i = 0; i < lagAntNoder; i++) { // Kjøres lagAntNoder ganger, og legger til en node hver gang.
+        settInnNode(new Node(minne, prosessor)); // Node med 64GB og en Prosessor blir satt inn.
+      }
+    }
+
   }
 
   public void lagRack(){
