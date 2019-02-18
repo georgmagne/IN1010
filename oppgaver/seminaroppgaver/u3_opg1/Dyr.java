@@ -1,4 +1,4 @@
-public abstract class Dyr {
+abstract class Dyr {
 
   public void lagLyd() {
 
