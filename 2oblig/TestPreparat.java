@@ -10,18 +10,14 @@ public class TestPreparat {
     Legemiddel[] middelListe;
     middelListe = new Legemiddel[]{prepA, prepB, prepC};
 
+    // System.out.println("Tester subklasse metoder:");
+    // System.out.println("PrepA sin narkotiske styrke: " + prepA.hentNarkotiskStyrke());
+    // System.out.println("PrepB sin vanedannende styrke: " + prepB.hentVanedannendeStyrke());
+
+
     for (Legemiddel elem: middelListe){
-      testAlle(elem);
+      System.out.println(elem.toString());
     }
-
-    prepA.settNyPris(2000000);
-    System.out.println(prepA.hentNavn() +" sin nye pris: "+prepA.hentPris());
-
-    System.out.println("Tester subklasse metoder:");
-    System.out.println("PrepA sin narkotiske styrke: " + prepA.hentNarkotiskStyrke());
-    System.out.println("PrepB sin vanedannende styrke: " + prepB.hentVanedannendeStyrke());
-
-
   }
 
   public static void testAlle(Legemiddel preparat) {

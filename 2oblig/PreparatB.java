@@ -11,4 +11,8 @@ public class PreparatB extends Legemiddel{ // Vanedannende legemtiddel
     return styrke;
   }
 
+  @Override
+  public String toString(){
+    return "Navn: " + this.navn + ", Pris: " + this.pris + ", Virkestoff mengde: " + super.virkestoffMngd + ", Styrke " + this.styrke;
+  }
 }

@@ -10,4 +10,9 @@ public class PreparatA extends Legemiddel{ // Narkotisk Legemiddel
   public double hentNarkotiskStyrke(){
     return styrke;
   }
+
+  @Override
+  public String toString(){
+    return "Navn: " + super.navn + ", Pris: " + super.pris + ", Virkestoff mengde: " + super.virkestoffMngd + ", Styrke " + this.styrke;
+  }
 }

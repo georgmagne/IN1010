@@ -1,11 +1,11 @@
 abstract public class Legemiddel { // Superklasse, abstract fordi et legemiddel må ha flere egenskaper (PreparatA,B,C osv..)
 
-  private String navn;
-  private double pris;
-  private double virkestoffMngd;
+  protected String navn;
+  protected double pris;
+  protected double virkestoffMngd;
 
-  private static int idTeller = 1;
-  private int id;
+  protected static int idTeller = 1;
+  protected int id;
 
   public Legemiddel(String navn, double pris, double virkestoff) {
     this.navn = navn;
