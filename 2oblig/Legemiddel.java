@@ -1,31 +1,33 @@
-public Legemiddel {
-  private int id;
+abstract public class Legemiddel { // Superklasse, abstract fordi et legemiddel må ha flere egenskaper (PreparatA,B,C osv..)
+
   private String navn;
   private double pris;
   private double virkestoffMngd;
-  public static int id = 0;
+
+  private static int idTeller = 1;
+  private int id;
 
   public Legemiddel(String navn, double pris, double virkestoff) {
     this.navn = navn;
     this.pris = pris;
     virkestoffMngd = virkestoff;
-    id += 1;
+    id = idTeller++;
   }
 
   public int hentId() {
-    return this.id;
+    return id;
   }
 
   public String hentNavn(){
-    return this.navn;
+    return navn;
   }
 
   public double hentPris(){
-    return this.pris;
+    return pris;
   }
 
   public double hentVirkestoffMngd() {
-    return this.virkestoffMngd;
+    return virkestoffMngd;
   }
 
   public void settNyPris(double nyPris) {
