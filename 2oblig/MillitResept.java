@@ -11,7 +11,7 @@ public class MillitResept extends HvitResept {
 
     @Override
     public String toString(){
-      return super.toString() + "\nRabatt: 100%" + // Prøvde super.super.middel.hentPris(), funket ikke, hvorfor?
+      return "Type: Millitær - " + super.toString() + "\nRabatt: 100%" + // Prøvde super.super.middel.hentPris(), funket ikke, hvorfor?
       "\nÅ betale: " + prisAaBetale();
     }
 }

@@ -20,6 +20,6 @@ public class Prevensjon extends HvitResept{
 
   @Override
   public String toString(){
-    return super.toString() + "\nRabatt: 108\nÅ Betale: " + prisAaBetale();
+    return "Type: Prevensjon - " + super.toString() + "\nRabatt: 108\nÅ Betale: " + prisAaBetale();
   }
 }

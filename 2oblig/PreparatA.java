@@ -13,6 +13,6 @@ public class PreparatA extends Legemiddel{ // Narkotisk Legemiddel
 
   @Override
   public String toString(){
-    return "Navn: " + super.navn + ", Pris: " + super.pris + ", Virkestoff mengde: " + super.virkestoffMngd + ", Styrke " + this.styrke;
+    return "Navn: " + super.navn + ", Pris: " + super.pris + ", Virkestoff mengde: " + super.virkestoffMngd + ", Narkotisksstyrke " + this.styrke;
   }
 }
