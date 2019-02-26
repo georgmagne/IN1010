@@ -1,11 +1,11 @@
 public class TestResepter{
 
   public static void main(String[] args) {
-    PreparatA prepA = new PreparatA("Black Tar Heroin", 300, 5, 10);
+    PreparatA prepA = new PreparatA("Paralgin forte", 300, 5, 10);
     PreparatB prepB = new PreparatB("Valium", 150, 3, 4);
     PreparatC prepC = new PreparatC("Paracet", 40, 2);
 
-    Lege lege = new Lege("Dr. Mengele");
+    Lege lege = new Lege("Dr. House");
 
     Resept hvit1 = new HvitResept(prepA, lege, 123, 1);
     Resept prev1 = new Prevensjon(prepB, lege, 1337, 1212);

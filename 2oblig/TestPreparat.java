@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TestPreparat {
 
   public static void main(String[] args) {
-    PreparatA prepA = new PreparatA("Black tar heroin", 300, 5, 10);
+    PreparatA prepA = new PreparatA("Paralgin forte", 300, 5, 10);
     PreparatB prepB = new PreparatB("Valium", 150, 3, 4);
     PreparatC prepC = new PreparatC("Paracet", 40, 2);
 

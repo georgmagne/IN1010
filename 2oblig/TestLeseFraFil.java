@@ -55,12 +55,10 @@ public class TestLeseFraFil {
       // System.out.println(navn +" " + type +" "+ pris +" "+ virkestoff + " " );
       // System.out.println(".......");
     }
-    System.out.println("-a-a-a-a-a-a-a--a-a-a-aa");
     System.out.println(midler.get(1));
     System.out.println(midler.get(2));
     System.out.println(midler.get(3));
     System.out.println(midler.get(4));
-    System.out.println("Hmap slutt\n");
 
     // Oppretter Lege objekter.
     for (String elem: test.leger){
@@ -78,7 +76,6 @@ public class TestLeseFraFil {
       }
     }
 
-    System.out.println("legegegegegeg--egege-leger");
     System.out.println(legeSamling.get("Dr. Cox"));
     System.out.println(legeSamling.get("Dr. House"));
 

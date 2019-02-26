@@ -1,11 +1,11 @@
 public class Integrasjonstest {
   public static void main(String[] args) {
 
-    Lege lege1 = new Lege("Dr. Mengele");
+    Lege lege1 = new Lege("Dr. Cox");
     Spesialist spes1 = new Spesialist("Dr. House", 12313);
     Lege[] legeListe = new Lege[]{lege1, spes1};
 
-    Legemiddel prepA = new PreparatA("Black Tar Heroin", 12, 12, 1);
+    Legemiddel prepA = new PreparatA("Paralgin Forte", 12, 12, 1);
     Legemiddel prepB = new PreparatB("Valium", 20, 5, 10);
     Legemiddel prepC = new PreparatC("Paracet", 123, 13);
     Legemiddel[] legemiddelListe = new Legemiddel[]{prepA, prepB, prepC};
