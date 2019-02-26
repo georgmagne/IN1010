@@ -4,7 +4,7 @@ abstract public class Legemiddel { // Superklasse, abstract fordi et legemiddel 
   protected double pris;
   protected double virkestoffMngd;
 
-  protected static int idTeller = 1;
+  protected static int idTeller = 0;
   protected int id;
 
   public Legemiddel(String navn, double pris, double virkestoff) {
@@ -32,6 +32,11 @@ abstract public class Legemiddel { // Superklasse, abstract fordi et legemiddel 
 
   public void settNyPris(double nyPris) {
     this.pris = nyPris;
+  }
+
+  @Override
+  public String toString() {
+    return "Middel IDnr: " + this.id + " - Navn: " + this.navn + " - Pris: " + this.pris + " - Virkestoff mengde: " + this.virkestoffMngd;
   }
 
 }

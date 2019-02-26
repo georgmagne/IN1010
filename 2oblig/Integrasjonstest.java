@@ -15,7 +15,7 @@ public class Integrasjonstest {
     Resept nyResept2 = reseptTryCatch(lege1, prepB, 123, 123);
     Resept ugyldigLege = reseptTryCatch(lege1, prepA, 1233, 123); // Prøver å lage en resept for narkotisk, med lege, ikke spesialist.
     Resept prev1 = reseptTryCatch(lege1, prepC, 12333);
-    Resept[] reseptListe = new Resept[]{nyResept1, nyResept2, prev1, ugyldigLege};
+    Resept[] reseptListe = new Resept[]{nyResept1, nyResept2, prev1, ugyldigLege}; // Tre resepter, en null.
 
     System.out.println();
     //Skriver ut Legemidlene.
@@ -68,6 +68,5 @@ public class Integrasjonstest {
       System.out.println(uu.getMessage());
       return null;
     }
-
   }
 }

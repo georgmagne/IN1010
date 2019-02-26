@@ -6,6 +6,6 @@ public class PreparatC extends Legemiddel{ // Vanedannende legemtiddel
 
   @Override
   public String toString(){
-    return "Navn: " + this.navn + ". Pris: " + this.pris + ". Virkestoff mengde: " + super.virkestoffMngd;
+    return "PreparatC - " + super.toString();
   }
 }

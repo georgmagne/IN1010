@@ -12,19 +12,35 @@ public class Lege {
     return this.navn;
   }
 
-  public HvitResept skrivResept(Legemiddel middel, int pasientID, int reit) throws UlovligUtskrift { // Vanlig HvitResept.
-    if ( middel instanceof PreparatA && !(this instanceof Spesialist) ) {
+  public Resept skrivResept(Legemiddel middel, int pasientID, int reit) throws UlovligUtskrift { // Vanlig HvitResept.
+    if ( middel instanceof PreparatA && !(this instanceof Spesialist)) {
         throw new UlovligUtskrift(this, middel);
     }
-    HvitResept nyResept = new HvitResept(middel, this, pasientID, reit);
+    Resept nyResept = new HvitResept(middel, this, pasientID, reit);
     return nyResept;
   }
 
-  public HvitResept skrivResept(Legemiddel middel, int pasientID) throws UlovligUtskrift { // Prevensjon resept, alltid 3 reit.
-    if (middel instanceof PreparatA && this.kontrollID == 0){
+  public Resept skrivResept(Legemiddel middel, int pasientID) throws UlovligUtskrift { // Prevensjon resept, alltid 3 reit.
+    if (middel instanceof PreparatA && !(this instanceof Spesialist)){
       throw new UlovligUtskrift(this, middel);
     }
-    HvitResept nyResept = new Prevensjon(middel, this, pasientID);
+    Resept nyResept = new Prevensjon(middel, this, pasientID);
+    return nyResept;
+  }
+
+  public Resept skrivBlaa(Legemiddel middel, int pasientID, int reit) throws UlovligUtskrift {
+    if (middel instanceof PreparatA && !(this instanceof Spesialist)) {
+      throw new UlovligUtskrift(this, middel);
+    }
+    Resept nyResept = new BlaaResept(middel, this, pasientID, reit);
+    return nyResept;
+  }
+
+  public Resept skrivMilitaer(Legemiddel middel, int pasientID, int reit) throws UlovligUtskrift {
+    if (middel instanceof PreparatA && !(this instanceof Spesialist)) {
+      throw new UlovligUtskrift(this, middel);
+    }
+    Resept nyResept = new MillitResept(middel, this, pasientID, reit);
     return nyResept;
   }
 
