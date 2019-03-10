@@ -1,0 +1,3 @@
+Lager en liste: f.eks 5 noder.
+Setter første og siste peker til null.
+Blir Nodene hentet av Garbage Collector? Eller blir de værende, fordi de har pekere tilordnet til seg fra de andre nodene.

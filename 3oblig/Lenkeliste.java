@@ -8,8 +8,8 @@ class Lenkeliste<T> implements Liste<T> {
     }
   }
 
-  private Node forste = null;
-  private Node siste = null;
+  protected Node forste = null;
+  protected Node siste = null;
 
 
   public int stoerrelse() {
