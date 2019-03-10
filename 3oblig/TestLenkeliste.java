@@ -77,12 +77,12 @@ public class TestLenkeliste {
         liste.leggTil("Element 4");
         liste.sett(0, "nyVerdi 0");
         liste.sett(2, "nyVerdi 2");
-        sjekk("nyVerdi 0", liste.hent(0), "hent(0) etter sett(0, \"nyVerdi 0\")");
-        sjekk("nyVerdi 2", liste.hent(2), "hent(2) etter sett(2, \"nyVerdi 2\")");
-        sjekk("Element 3", liste.fjern(3), "fjern(3)");
-        sjekk("Element 4", liste.fjern(3), "fjern(3) for andre gang");
+        sjekk("nyVerdi 0", liste.hent(0), "hent(0) etter sett(0, \"nyVerdi 0\")"); //18
+        sjekk("nyVerdi 2", liste.hent(2), "hent(2) etter sett(2, \"nyVerdi 2\")"); //19
+        sjekk("Element 3", liste.fjern(3), "fjern(3)"); //20
+        sjekk("Element 4", liste.fjern(3), "fjern(3) for andre gang"); //21
         liste.leggTil("NyttElement");
-        sjekk("NyttElement", liste.hent(3), "hent(3) skal hente nytt element lagt til etter at andre elementer har blitt fjernet");
+        sjekk("NyttElement", liste.hent(3), "hent(3) skal hente nytt element lagt til etter at andre elementer har blitt fjernet"); //22
         sjekk(4, liste.stoerrelse(), "stoerrelse() etter flere kall paa fjern() og leggTil()");
     }
 
