@@ -24,6 +24,12 @@ class Lenkeliste<T> implements Liste<T> {
   }
 
   public void leggTil(int pos, T x) {
+    if (pos > this.stoerrelse()){
+      throw new UgyldigListeIndeks(-1);
+    }
+    if (pos < 0){
+      throw new UgyldigListeIndeks(-1);
+    }
     Node peker = forste;
 
     if (peker == null) { // listen er tom.
@@ -51,6 +57,7 @@ class Lenkeliste<T> implements Liste<T> {
   }
 
   public void leggTil(T x) { // Kø: nye noder skal bakerst i listen.
+
     Node nyNode = new Node(x);
     if (forste == null && siste == null) { // Listen er tom.
       forste = nyNode;
@@ -67,6 +74,10 @@ class Lenkeliste<T> implements Liste<T> {
   }
 
   public void sett(int pos, T x) {
+    if(forste == null && siste == null) {
+      throw new UgyldigListeIndeks(-1);
+    }
+
     Node peker = forste;
 
     for (int i = 0; i < pos; i++) {
@@ -76,6 +87,10 @@ class Lenkeliste<T> implements Liste<T> {
   }
 
   public T hent(int pos) {
+    if(forste == null && siste == null) {
+      throw new UgyldigListeIndeks(-1);
+    }
+
     Node peker = forste;
 
     if (pos == 0){ // Den som skal hentes er den første.
@@ -93,6 +108,10 @@ class Lenkeliste<T> implements Liste<T> {
   }
 
   public T fjern(int pos) {
+    if (forste == null && siste == null) {
+      throw new UgyldigListeIndeks(-1);
+    }
+
     Node peker = forste;
 
     if (forste == siste){ // kun ett objekt i listen.
@@ -116,6 +135,9 @@ class Lenkeliste<T> implements Liste<T> {
   }
 
   public T fjern() throws UgyldigListeIndeks{ // Tvinger de som kaller metoden til å bruke try-catch, noe TestLenkeliste gjør..
+    if (forste == null && siste == null){ //tom liste.
+      throw new UgyldigListeIndeks(-1);
+    }
     Node tmp = forste;
     forste = forste.neste;
     return tmp.data;
