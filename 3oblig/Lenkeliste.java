@@ -77,6 +77,12 @@ class Lenkeliste<T> implements Liste<T> {
     if(forste == null && siste == null) {
       throw new UgyldigListeIndeks(-1);
     }
+    if (pos >= this.stoerrelse()){
+      throw new UgyldigListeIndeks(pos);
+    }
+    if (pos < 0){
+      throw new UgyldigListeIndeks(-1);
+    }
 
     Node peker = forste;
 
@@ -88,6 +94,12 @@ class Lenkeliste<T> implements Liste<T> {
 
   public T hent(int pos) {
     if(forste == null && siste == null) {
+      throw new UgyldigListeIndeks(-1);
+    }
+    if (pos >= this.stoerrelse()){
+      throw new UgyldigListeIndeks(pos);
+    }
+    if (pos < 0){
       throw new UgyldigListeIndeks(-1);
     }
 
@@ -109,6 +121,12 @@ class Lenkeliste<T> implements Liste<T> {
 
   public T fjern(int pos) {
     if (forste == null && siste == null) {
+      throw new UgyldigListeIndeks(-1);
+    }
+    if (pos >= this.stoerrelse()){
+      throw new UgyldigListeIndeks(pos);
+    }
+    if (pos < 0){
       throw new UgyldigListeIndeks(-1);
     }
 
@@ -138,6 +156,7 @@ class Lenkeliste<T> implements Liste<T> {
     if (forste == null && siste == null){ //tom liste.
       throw new UgyldigListeIndeks(-1);
     }
+
     Node tmp = forste;
     forste = forste.neste;
     return tmp.data;
