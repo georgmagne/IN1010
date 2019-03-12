@@ -1,13 +1,24 @@
-public class Katt {
-  String navn;
-  int alder;
+public class Katt implements Comparable<Katt> {
+  private String navn;
+  private int alder;
 
-  public Katt(Sting n, int a){
-    this.navn = n;
-    this.alder = a;
+  public Katt(String navn, int alder) {
+    this.navn = navn;
+    this.alder = alder;
   }
-  @Override
-  public String toString() {
-    return "Katten " + navn + " er " + alder + " gammel."
+
+  public int compareTo (Katt annen){
+    if (this.alder < annen.alder) {
+      return -1;
+    } else if (this.alder > annen.alder){
+      return 1;
+    } else {
+      return 0;
+
+    }
+  }
+
+  public String toString(){
+    return "Katten " + navn + " er " + alder + " år";
   }
 }
