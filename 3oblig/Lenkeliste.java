@@ -32,7 +32,7 @@ class Lenkeliste<T> implements Liste<T> {
     }
     Node peker = forste;
 
-    if (peker == null) { // listen er tom.
+    if (forste == null && siste == null) { // listen er tom.
       forste = new Node(x);
       siste = forste;
 
@@ -42,7 +42,7 @@ class Lenkeliste<T> implements Liste<T> {
       forste = nyNode;
       nyNode.neste = gammelNeste;
 
-    } else if(pos +1== this.stoerrelse() ){ // Node skal settes inn bakerst.
+    } else if(pos +1== this.stoerrelse()){ // Node skal settes inn bakerst.
       leggTil(x);
     } else {
         for (int i = 1; i < pos; i++) { // Finner fram til pekeren som er den "forrige" til den som skal settes inn.
@@ -66,10 +66,6 @@ class Lenkeliste<T> implements Liste<T> {
       Node gammelSiste = siste;
       siste = nyNode;
       gammelSiste.neste = siste;
-    }
-    Node peker = forste;
-    for (int i = 0; i < this.stoerrelse(); i++) {
-      peker = peker.neste;
     }
   }
 

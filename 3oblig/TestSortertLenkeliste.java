@@ -17,20 +17,20 @@ public class TestSortertLenkeliste {
     static void testTom() {
         System.out.println("Test tom liste");
         Liste<String> liste = new SortertLenkeliste<String>();
-        sjekk(0, liste.stoerrelse(), "stoerrelse() i tom liste");
+        sjekk(0, liste.stoerrelse(), "stoerrelse() i tom liste"); // 1
     }
 
     static void testEttElement() {
         System.out.println("\nTest ett element");
         Liste<String> liste = new SortertLenkeliste<String>();
         liste.leggTil("A");
-        sjekk(1, liste.stoerrelse(), "stoerrelse() i liste med ett element");
+        sjekk(1, liste.stoerrelse(), "stoerrelse() i liste med ett element"); //2
         String hentetElement = liste.hent(0);
-        sjekk("A", hentetElement, "hent(0) i liste med ett element");
+        sjekk("A", hentetElement, "hent(0) i liste med ett element"); //3
         // hent(0) skal ikke fjerne elementet, la oss sjekke at fjerning fungerer
         String fjernetElement = liste.fjern();
-        sjekk("A", fjernetElement, "fjern() i liste med ett element");
-        sjekk(0, liste.stoerrelse(), "stoerrelse() etter at eneste element er fjernet");
+        sjekk("A", fjernetElement, "fjern() i liste med ett element"); //4
+        sjekk(0, liste.stoerrelse(), "stoerrelse() etter at eneste element er fjernet"); //5
     }
 
     static void testLeggTilOgFjerningAvFlereElementer() {
@@ -40,11 +40,11 @@ public class TestSortertLenkeliste {
         liste.leggTil("A");
         liste.leggTil("D");
         liste.leggTil("B");
-        sjekk(4, liste.stoerrelse(), "stoerrelse() i liste med 4 elementer");
-        sjekk("A", liste.hent(0), "hent(0) i liste med 4 elementer");
-        sjekk("B", liste.hent(1), "hent(1) i liste med 4 elementer");
-        sjekk("D", liste.hent(3), "hent(3) i liste med 4 elementer");
-        sjekk("D", liste.fjern(), "fjern() i liste med 4 elementer");
+        sjekk(4, liste.stoerrelse(), "stoerrelse() i liste med 4 elementer"); //6
+        sjekk("A", liste.hent(0), "hent(0) i liste med 4 elementer"); //7
+        sjekk("B", liste.hent(1), "hent(1) i liste med 4 elementer"); //8
+        sjekk("D", liste.hent(3), "hent(3) i liste med 4 elementer"); //9
+        sjekk("D", liste.fjern(), "fjern() i liste med 4 elementer"); //10
         sjekk("C", liste.fjern(), "fjern() (for andre gang) i liste med 3 elementer");
         sjekk(2, liste.stoerrelse(), "stoerrelse() etter fjerning av 2 av 4 elementer");
     }
@@ -69,7 +69,6 @@ public class TestSortertLenkeliste {
         liste.leggTil("elementAA"); // Duplikater skal vaere tillatt
         liste.leggTil("elementBBB");
         liste.leggTil("elementD");
-
         String rekkefolge = liste.hent(0) + " - " + liste.hent(1) + " - " + liste.hent(2) +
                 " - " + liste.hent(3) + " - " + liste.hent(4) + " - " + liste.hent(5);
         String forventet = "elementAA - elementAA - elementBBB - elementC - elementD - elementSist";
