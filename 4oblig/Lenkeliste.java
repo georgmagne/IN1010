@@ -31,7 +31,7 @@ class Lenkeliste<T> implements Liste<T>, Iterable<T> {
     @Override
     public T next(){
       if (hasNext()) {
-        return (T)liste.hent(tall++);
+        return (T)liste.hent(tall++); // OBS OBS Type casting.
       }
         throw new NoSuchElementException();
     // return liste.hent(tall++);

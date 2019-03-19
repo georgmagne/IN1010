@@ -1,11 +1,13 @@
-public class Lege {
+public class Lege implements Comparable<Lege>{
 
   protected String navn;
   protected int kontrollID;
+  protected Lenkeliste<Resept>;
 
   public Lege(String navn) {
       this.navn = navn;
       this.kontrollID = 0; // Ikke godkjenningsfritak.
+      this.utskrevendeResept = new Lenkeliste<Resept>;
   }
 
   public String hentNavn() {
@@ -42,6 +44,11 @@ public class Lege {
     }
     Resept nyResept = new MillitResept(middel, this, pasient, reit);
     return nyResept;
+  }
+
+  @Override
+  public int compareTo(Lege lege){
+    return this.navn.compareTo(lege.hentNavn());
   }
 
   @Override
