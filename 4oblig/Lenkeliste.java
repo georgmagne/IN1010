@@ -1,4 +1,7 @@
-class Lenkeliste<T> implements Liste<T> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+class Lenkeliste<T> implements Liste<T>, Iterable<T> {
   class Node { // Hjelpe klasse.
     Node neste = null;
     T data;
@@ -11,6 +14,31 @@ class Lenkeliste<T> implements Liste<T> {
   protected Node forste = null;
   protected Node siste = null;
 
+  class LenkelisteIterator implements Iterator<T> {
+
+    private Lenkeliste liste;
+    private int tall = 0;
+
+    public LenkelisteIterator(Lenkeliste<T> liste){
+      this.liste = liste;
+    }
+
+    @Override
+    public boolean hasNext(){
+      return tall < liste.stoerrelse();
+    }
+
+    @Override
+    public T next(){
+      if (hasNext()) {
+        return (T)liste.hent(tall++);
+      }
+        throw new NoSuchElementException();
+    // return liste.hent(tall++);
+    // return (T) liste.hent(tall++);
+    // return null;
+    }
+  }
 
   public int stoerrelse() {
     Node peker = forste;
@@ -115,6 +143,22 @@ class Lenkeliste<T> implements Liste<T> {
       }
   }
 
+  //Hent fra Daniel
+  // public T hent(int pos) throws UgyldigListeIndeks {
+  //   if (pos > 0 && pos < stoerrelse() ){
+  //     Node p = start;
+  //     for (int i = 0; i < pos; i++){
+  //       p = p.neste;
+  //     }
+  //     return p.data;
+  //   } else if (pos == 0) {
+  //     if(stoerrelse() != 0){
+  //       return start.data;
+  //     }
+  //   }
+  //   throw new UgyldigListeIndeks(pos);
+  // }
+
   public T fjern(int pos) {
     if (forste == null && siste == null) {
       throw new UgyldigListeIndeks(-1);
@@ -157,4 +201,9 @@ class Lenkeliste<T> implements Liste<T> {
     forste = forste.neste;
     return tmp.data;
   }
+
+  public Iterator<T> iterator(){
+    return new LenkelisteIterator(this);
+  }
+
 }
