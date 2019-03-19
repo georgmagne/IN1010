@@ -16,7 +16,7 @@ public class Pasient {
   }
 
   public String resepterToString() { // "Organiserer" reseptene til én string.
-    String returString;
+    String returString = "";
     for (int i = 0; i < resepter.stoerrelse(); i++){
       returString = returString + "\n" + resepter.hent(i).toString();
     }

@@ -1,10 +1,10 @@
 public class Prevensjon extends HvitResept{
 
-  public Prevensjon(Legemiddel middel, Lege lege, int pasient){
+  public Prevensjon(Legemiddel middel, Lege lege, Pasient pasient){
     super(middel, lege, pasient, 3);
   }
 
-  public Prevensjon(Legemiddel middel, Lege lege, int pasient, int reit){ // Overloading for mulighet til å spesifisere reit etter ønske utover 3.
+  public Prevensjon(Legemiddel middel, Lege lege, Pasient pasient, int reit){ // Overloading for mulighet til å spesifisere reit etter ønske utover 3.
     super(middel, lege, pasient, reit);
   }
 
