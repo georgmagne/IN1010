@@ -2,12 +2,12 @@ public class Lege implements Comparable<Lege>{
 
   protected String navn;
   protected int kontrollID;
-  protected Lenkeliste<Resept>;
+  protected Lenkeliste<Resept> utskrevetResepter;
 
   public Lege(String navn) {
       this.navn = navn;
       this.kontrollID = 0; // Ikke godkjenningsfritak.
-      this.utskrevendeResept = new Lenkeliste<Resept>;
+      this.utskrevetResepter = new Lenkeliste<Resept>() ;
   }
 
   public String hentNavn() {
@@ -19,6 +19,7 @@ public class Lege implements Comparable<Lege>{
         throw new UlovligUtskrift(this, middel);
     }
     Resept nyResept = new HvitResept(middel, this, pasient, reit);
+    utskrevetResepter.leggTil(nyResept);
     return nyResept;
   }
 
@@ -27,6 +28,7 @@ public class Lege implements Comparable<Lege>{
       throw new UlovligUtskrift(this, middel);
     }
     Resept nyResept = new Prevensjon(middel, this, pasient);
+    utskrevetResepter.leggTil(nyResept);
     return nyResept;
   }
 
@@ -35,6 +37,8 @@ public class Lege implements Comparable<Lege>{
       throw new UlovligUtskrift(this, middel);
     }
     Resept nyResept = new BlaaResept(middel, this, pasient, reit);
+    utskrevetResepter.leggTil(nyResept);
+
     return nyResept;
   }
 
@@ -43,6 +47,7 @@ public class Lege implements Comparable<Lege>{
       throw new UlovligUtskrift(this, middel);
     }
     Resept nyResept = new MillitResept(middel, this, pasient, reit);
+    utskrevetResepter.leggTil(nyResept);
     return nyResept;
   }
 
@@ -54,5 +59,13 @@ public class Lege implements Comparable<Lege>{
   @Override
   public String toString() {
     return this.navn + " - Godkjennigspliktig.";
+  }
+
+  public void hentResepter() {
+    String utskrift = "";
+    for (Resept elem: this.utskrevetResepter) {
+      utskrift = utskrift + " " +elem.toString();
+    }
+    System.out.println(this.navn + " har skrivet disse reseptene: " + utskrift);
   }
 }
