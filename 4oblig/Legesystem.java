@@ -14,20 +14,33 @@ public class Legesystem{
   }
 
   public Legemiddel finnLegemiddel(int legemiddelNr){
-    for (Node elem: legemiddelListe) {
-      if (elem.data.hentId() == legemiddelNr) {
-        return elem.data;
+    for (Legemiddel elem: legemiddelListe){
+      if (elem.hentId() == legemiddelNr) {
+        return elem;
       }
     }
       System.out.println("Fant ikke det legemiddelet.");
+      return null;
   }
 
   public Lege finnLege(String navn){
-
+    for (Lege elem: legeListe){
+      if(elem.hentNavn() == navn){
+        return elem;
+      }
+    }
+    System.out.println("Fant ikke den legen");
+    return null;
   }
 
-  public Pasient finnPasient(int PasientID){
-
+  public Pasient finnPasient(int pasientID){
+    for (Pasient elem: pasientListe){
+      if (elem.id == pasientID){
+        return elem;
+      }
+    }
+    System.out.println("Fant ikke den pasienten");
+    return null;
   }
 
   private static void lesFraFil(File fil){
