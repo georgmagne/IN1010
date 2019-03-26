@@ -11,6 +11,10 @@ public class Pasient {
     this.persnr = persnr;
   }
 
+  public String hentNavn(){
+    return this.navn;
+  }
+
   public void leggTilResept(Resept nyResept) {
     resepter.leggTil(nyResept); // Har ikke behov for å legg til på spesifikk posisjon.
   }
@@ -25,5 +29,9 @@ public class Pasient {
 
   public void skrivResepter(){ // Skriver ut den resptene.
     System.out.print(resepterToString());
+  }
+
+  public String toString(){
+    return this.navn + " (persnr: " + this.persnr + ")";
   }
 }

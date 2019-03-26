@@ -24,20 +24,22 @@ public class Lenkeliste<T> implements Liste<T> {
 
     @Override
     public boolean hasNext(){
-      if (posisjon == null){ //tom liste
-        return false;
-      }
-      return posisjon.neste != null;
+      // if (posisjon == null){ //tom liste
+      //   return false;
+      // }
+
+      // return posisjon.neste != null; // for each loop gir ikke siste element.
+      return posisjon != null; // ikke helt riktig...
     }
 
     @Override
     public T next(){
-      if (!hasNext()) {
-        throw new NoSuchElementException();
+      if (hasNext()) {
+        Node tmp = posisjon;
+        posisjon = posisjon.neste;
+        return tmp.data;
       }
-      Node tmp = posisjon;
-      posisjon = posisjon.neste;
-      return tmp.data;
+      throw new NoSuchElementException();
     }
 
     @Override

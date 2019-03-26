@@ -23,7 +23,6 @@ public class SortertLenkeliste<T extends Comparable<T>> extends Lenkeliste<T> {
         }
         peker = peker.neste;
       }
-
     }
   }
 

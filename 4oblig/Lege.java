@@ -64,8 +64,9 @@ public class Lege implements Comparable<Lege>{
   public void hentResepter() {
     String utskrift = "";
     for (Resept elem: this.utskrevetResepter) {
-      utskrift = utskrift + " " +elem.toString();
+      utskrift = utskrift + elem.toString() + "\n";
+      System.out.println();
     }
-    System.out.println(this.navn + " har skrivet disse reseptene: " + utskrift);
+    System.out.println(this.navn + " har skrivet disse reseptene: \n" + utskrift);
   }
 }
