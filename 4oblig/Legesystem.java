@@ -115,11 +115,17 @@ public class Legesystem{
         // Veglger legemiddel.
         System.out.println("Velg legemiddel");
         for (Legemiddel elem: legemiddelListe){
-          System.out.println(elem.hentNavn());
+          System.out.println(elem.id + ": " + elem.hentNavn());
         }
 
         System.out.println("Oppgi navnet:");
-        String aktueltMiddelNavn = inn.nextLine();
+        int aktueltMiddelID;
+        try {
+          aktueltMiddelID = Integer.valueOf(inn.nextLine());
+        } catch (NumberFormatException e) {
+          System.out.println("Du må oppgi et tall!");
+          break;
+        }
 
         //Velger lege.
         System.out.println("Hvilken lege skal skrive ut?");
@@ -134,10 +140,17 @@ public class Legesystem{
         // Velg pasient
         System.out.println("Hvilken pasient skal ha resepten?");
         for (Pasient elem: pasientListe){
-          System.out.println(elem.hentNavn());
+          System.out.println(elem.id + ": " + elem.hentNavn());
         }
-        System.out.println("Oppgi navn:");
-        String aktuellPasientNavn = inn.nextLine();
+        System.out.println("Oppgi pasientID:");
+        int aktuellPasientId;
+        try{
+          aktuellPasientId = Integer.valueOf(inn.nextLine());
+        } catch (NumberFormatException e) {
+          System.out.println("Du må oppgi et tall!");
+          break;
+        }
+
 
 
         // Velg antall reit.
@@ -150,7 +163,7 @@ public class Legesystem{
           break;
         }
 
-        leggTilResept(aktueltMiddelNavn, aktuellLegeNavn, aktuellPasientNavn, antReit);
+        leggTilResept(aktueltMiddelID, aktuellLegeNavn, aktuellPasientId, antReit);
 
         // System.out.println("\nSkriving av respet må gjøres av lege.");
         // System.out.println("Hvilket legemiddel skal skrives ut?");
@@ -252,31 +265,13 @@ public class Legesystem{
     Legemiddel nyttMiddel = new PreparatC(navn, pris, virkestoff);
   }
 
-  public static void leggTilResept(String middelNavn, String legeNavn, String pasientNavn, int reit){
-    Legemiddel aktueltMiddel = null;
-    Lege aktuellLege = null;
-    Pasient aktuellPasient = null;
-
-    // Finner Legemiddel objekt.
-    for (Legemiddel elem: legemiddelListe){
-      if (elem.hentNavn() == middelNavn){
-        aktueltMiddel = elem;
-      }
-    }
-
-    //Finner lege objekt.
-    for (Lege elem: legeListe){
-      if(elem.hentNavn().equals(aktuellLege)){
-        aktuellLege = elem;
-      }
-    }
-
-    // Finner Pasient objekt
-    for (Pasient elem: pasientListe){
-      if(elem.hentNavn().equals(pasientNavn)){
-        aktuellPasient = elem;
-      }
-    }
+  public static void leggTilResept(int middelID, String legeNavn, int pasientID, int reit){
+    Legemiddel aktueltMiddel = finnLegemiddel(middelID);
+    Lege aktuellLege = finnLege(legeNavn);
+    Pasient aktuellPasient = finnPasient(pasientID);
+    System.out.println(aktuellLege);
+    System.out.println(aktuellPasient);
+    System.out.println(aktueltMiddel);
 
     if(aktueltMiddel != null && aktuellLege != null && aktuellPasient != null){
       Resept nyResept = null;
@@ -362,8 +357,8 @@ public class Legesystem{
         while(scanner.hasNextLine()) {
           innlest = scanner.nextLine();
 
-          if(innlest.charAt(0) == '#'){     //Om vi er ferdig med å legge til pasienter, bryt whileløkken,
-            break;                          //slik at vi fortsetter til koden for å legge til legemiddler
+          if(innlest.charAt(0) == '#'){
+            break;                          
           }
 
           String[] innlestListe = innlest.split(", "); // Lagde selv.. Se neste blokk.
@@ -378,10 +373,7 @@ public class Legesystem{
       } else if(info[1].compareTo("Legemidler") == 0){ //Legger inn Legemidlene
         while(scanner.hasNextLine()){
           innlest = scanner.nextLine();
-          // String[] innlestListe = innlest.split(", ");
 
-          //Om vi er ferdig med å legge til legemidler, bryt whileløkken,
-          //slik at vi fortsetter til koden for å legge til leger
           if(innlest.charAt(0) == '#'){
             break;
           }
@@ -415,8 +407,6 @@ public class Legesystem{
         while(scanner.hasNextLine()){
           innlest = scanner.nextLine();
 
-            //Om vi er ferdig med å legge til leger, bryt whileløkken,
-            //slik at vi fortsetter til koden for å legge til resepter
           if(innlest.charAt(0) == '#'){
             break;
           }
@@ -453,22 +443,6 @@ public class Legesystem{
           } catch (UlovligUtskrift uu) {
           System.out.println(uu.getMessage());
           }
-
-
-
-          //
-          // Her må du finne legen, legemiddelet, og pasienten som ligger
-          // i lenkelistene utifra informasjonen.
-          //
-          // Dette burde skilles ut i hjelpemetoder leter gjennom listene
-          // og returnerer riktig objekt, ut ifra informasjonen som ble lest inn
-          //
-          // Opprett et reseptobjekt med skrivResept funksjonen i legen,
-          // og legg det til i en lenkeliste
-          //
-          // Dersom legeobjektene dine oppretter PResepter, kan du ignorere reit
-          //
-          //
         }
       }
     }
