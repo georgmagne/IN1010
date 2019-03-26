@@ -3,6 +3,9 @@ public class Lege implements Comparable<Lege>{
   protected String navn;
   protected int kontrollID;
   protected Lenkeliste<Resept> utskrevetResepter;
+  protected int skrevetNarko = 0;
+  protected int skrevetVane = 0;
+
 
   public Lege(String navn) {
       this.navn = navn;
@@ -13,6 +16,13 @@ public class Lege implements Comparable<Lege>{
   public String hentNavn() {
     return this.navn;
   }
+  public int hentSkrevetNarko(){
+    return skrevetNarko;
+  }
+
+  public int hentSkrevetVane(){
+    return skrevetVane;
+  }
 
   public Resept skrivResept(Legemiddel middel, Pasient pasient, int reit) throws UlovligUtskrift { // Vanlig HvitResept.
     if ( middel instanceof PreparatA && !(this instanceof Spesialist)) {
@@ -20,6 +30,13 @@ public class Lege implements Comparable<Lege>{
     }
     Resept nyResept = new HvitResept(middel, this, pasient, reit);
     utskrevetResepter.leggTil(nyResept);
+    pasient.leggTilResept(nyResept);
+    if (nyResept.hentLegemiddel() instanceof PreparatA){
+      skrevetNarko++;
+    }
+    if (nyResept.hentLegemiddel() instanceof PreparatB){
+      skrevetVane++;
+    }
     return nyResept;
   }
 

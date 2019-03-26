@@ -9,6 +9,7 @@ public class Pasient {
     this.id = idTeller++;
     this.navn = navn;
     this.persnr = persnr;
+    this.resepter = new Stabel<Resept>();
   }
 
   public String hentNavn(){
@@ -33,5 +34,19 @@ public class Pasient {
 
   public String toString(){
     return this.navn + " (persnr: " + this.persnr + ")";
+  }
+
+  public Stabel<Resept> hentReseptListe(){
+    return resepter;
+  }
+
+  public int tellNarkoResept(){
+    int totNarko = 0;
+    for (Resept elem: resepter){
+      if (elem.hentLegemiddel() instanceof PreparatA){
+        totNarko++;
+      }
+    }
+    return totNarko;
   }
 }

@@ -9,6 +9,9 @@ public class Legesystem{
   private static Lenkeliste<Legemiddel> legemiddelListe = new Lenkeliste<>();
   private static Lenkeliste<Resept> reseptListe = new Lenkeliste<>();
 
+  public static int totNarko = 0;
+  public static int totVane = 0;
+
   private static boolean running = true;
   private static Scanner input = new Scanner(System.in);
 
@@ -34,8 +37,8 @@ public class Legesystem{
 
       switch(fraBruker){
         case "q":
-        System.out.println("Avslutter programmet");
-        running = false;
+          System.out.println("Avslutter programmet");
+          running = false;
         break;
 
         case "1":
@@ -44,13 +47,16 @@ public class Legesystem{
           break;
         case "2":
           leggTilElement();
-          System.out.println("\n===================\nMulighet for å legge til elementer er ikke implementert.");
           break;
         case "3":
-          System.out.println("\n===================\nMulighet for å bruke resept er ikke implementert.");
+          brukResept();
           break;
         case "4":
-          System.out.println("\n===================\nMulighet for å skrive ut statistikk er ikke implementert.");
+          lagStatistikk();
+          System.out.println("\nTotalt utskrevende Narkotiske: " + totNarko);
+          System.out.println("Totalt utskrevende Vanedannende: " + totVane);
+          System.out.println();
+          statNarkoMisbruk();
           break;
         case "5":
           System.out.println("\n===================\nMulighet for å skrive til fil er ikke implementert.");
@@ -59,6 +65,36 @@ public class Legesystem{
         default:
           System.out.println("Ugyldig input. Prøv på nytt.");
       }
+    }
+  }
+
+  public static void lagStatistikk() {
+    totNarko = 0;
+    totVane = 0;
+    for (Lege elem: legeListe){
+      totNarko = totNarko + elem.hentSkrevetNarko();
+      totVane = totVane + elem.hentSkrevetVane();
+    }
+  }
+
+  public static void statNarkoMisbruk(){
+    for (Lege elem: legeListe){
+      if(elem.hentSkrevetNarko() > 0 ){
+      System.out.println(elem.hentNavn() + " har skrevet: " + elem.hentSkrevetNarko() + " resepter for narkotisk legemiddel.");
+      }
+    }
+
+    System.out.println();
+    for (Pasient elem: pasientListe){
+      if (elem.tellNarkoResept() > 0){
+        System.out.println(elem + " har " + elem.tellNarkoResept() + " narkotiske resepter.");
+      }
+      // for (Resept reseptElem: elem.hentReseptListe()){
+      //   if (reseptElem.hentLegemiddel() instanceof PreparatA){
+      //     System.out.println(elem + " har "+ i + " narkotisk resept");
+      //     System.out.println();
+      //   }
+      // }
     }
   }
 
@@ -151,8 +187,6 @@ public class Legesystem{
           break;
         }
 
-
-
         // Velg antall reit.
         System.out.println("Oppgi antal reit:");
         int antReit;
@@ -164,76 +198,118 @@ public class Legesystem{
         }
 
         leggTilResept(aktueltMiddelID, aktuellLegeNavn, aktuellPasientId, antReit);
-
-        // System.out.println("\nSkriving av respet må gjøres av lege.");
-        // System.out.println("Hvilket legemiddel skal skrives ut?");
-        // System.out.println("Velg mellom disse:\n");
-        // for (Legemiddel elem: legemiddelListe){
-        //   System.out.println(elem.hentNavn());
-        // }
-        //
-        // Legemiddel akueltMiddel;
-        // Pasient aktuellPasient;
-        // int antReit;
-        // Lege aktuellLege;
-        //
-        // String middelNavn = inn.nextLine();
-        // for (Legemiddel elem: legemiddelListe){
-        //   if (elem.hentNavn().equals(middelNavn)){
-        //     akueltMiddel = elem;
-        //     break;
-        //   }
-        // }
-        // System.out.println("\nHvem skal resepten skrives ut til?");
-        // System.out.println("Velg mellom disse pasientene:\n");
-        // for (Pasient elem: pasientListe){
-        //   System.out.println(elem.hentNavn());
-        // }
-        // String pasientNavn = inn.nextLine();
-        // for (Pasient elem: pasientListe){
-        //   if(elem.hentNavn().equals(pasientNavn)){
-        //     aktuellPasient = elem;
-        //   } else {
-        //     System.out.println("Fant ikke den pasienten. Prøv på nytt.");
-        //   }
-        // }
-        //
-        // System.out.println("Hvor mange reit?");
-        // try {
-        //   antReit = Integer.valueOf(inn.nextLine());
-        // } catch (NumberFormatException e){
-        //   System.out.println("Antall reit må være et tall! Prøv på nytt.");
-        // }
-        //
-        // System.out.println("Hvilken lege skal skrive ut?");
-        // System.out.println("Velg mellom disse:");
-        // for (Lege elem: legeListe){
-        //   System.out.println(elem.hentNavn());
-        // }
-        // String legeNavn = inn.nextLine();
-        // for (Lege elem: legeListe){
-        //   if(elem.hentNavn().equals(legeNavn)){
-        //     aktuellLege = elem;
-        //   } else {
-        //     System.out.println("Fant ikke den legen. Prøv på nytt!");
-        //   }
-        // }
-        //
-        // // try {
-        //   Resept nyResept = aktuellLege.skrivResept(akueltMiddel, aktuellPasient, antReit);
-        // // } catch (UlovligUtskrift e){
-        // //   e.getMessage();
-        // // }
-
         break;
 
       case ("4"): // Legemiddel
-        System.out.println("Legger til legemiddel");
+        System.out.println("Legger til legemiddel...");
+
+        System.out.println("Oppgi navn på middel:");
+        String middelNavn = inn.nextLine();
+
+        System.out.println("Oppgi prisen:");
+        double middelPris = Double.valueOf(inn.nextLine());
+
+        System.out.println("Oppgi virkestoff mengde:");
+        double middelVirkestoff = Double.valueOf(inn.nextLine());
+
+        System.out.println("Velg legemiddeltype:");
+        System.out.println("1: Narkotisk");
+        System.out.println("2: Vanedannende");
+        System.out.println("3: Vanlig");
+
+        String valg = inn.nextLine();
+        Legemiddel nyttMiddel = null;
+        int styrke;
+
+        if (valg.equals("1")){
+          System.out.println("Oppgi styrke:");
+          styrke = Integer.valueOf(inn.nextLine());
+          leggTilNarkoLegemiddel(middelNavn, middelPris, middelVirkestoff, styrke);
+        }
+
+        if (valg.equals("2")){
+          System.out.println("Oppgi styrke:");
+          styrke = Integer.valueOf(inn.nextLine());
+          leggTilVaneLegemiddel(middelNavn, middelPris, middelVirkestoff, styrke);
+        }
+
+        if (valg.equals("3")){
+          leggTilLegemiddel(middelNavn, middelPris, middelVirkestoff);
+
+        } else {
+          System.out.println("Du må skrive et tall mellom 1-3. Prøv på nytt.");
+        }
+
         break;
 
 
     }
   }
+
+  public static void brukResept(){
+    Scanner inn = new Scanner(System.in);
+    System.out.println("Velg pasient:");
+    for (Pasient elem: pasientListe){
+      System.out.println(elem.id + ": " + elem);
+
+    }
+    int valgtPasient = Integer.valueOf(inn.nextLine());
+
+    // Finner pasient --- Kan bruke finnPasient metode ;(
+    Pasient aktuellPasient = null;
+    for (Pasient elem: pasientListe){
+      if(elem.id == valgtPasient){
+        aktuellPasient = elem;
+        System.out.println("\nDu valgte " + aktuellPasient);
+        break;
+      }
+    }
+    if(aktuellPasient == null){
+      System.out.println("Fant ikke den pasienten. Prøv på nytt.");
+      return;
+    }
+
+    if(aktuellPasient.hentReseptListe().stoerrelse() == 0){ // Pasienten har ingen resepter.
+      System.out.println("Den pasienten har ingen resepter.");
+      return;
+    }
+
+    System.out.println("Velg resept.");
+    for (Resept elem: aktuellPasient.hentReseptListe()){
+      System.out.println(elem.hentID() +": "+ elem.hentLegemiddel().hentNavn() + " - Uthentinger igjen: " + elem.hentReit());
+    }
+
+    int valg = Integer.valueOf(inn.nextLine());
+    Resept aktuellResept = null;
+
+
+    for (Resept elem: aktuellPasient.hentReseptListe()){
+      if (valg == elem.hentID()){
+        aktuellResept = elem;
+        System.out.println("Du har valgt: ");
+        System.out.println(elem);
+
+        System.out.println("");
+      } else {
+        System.out.println("Fant ikke den resepten.");
+      }
+    }
+
+    if (aktuellResept.bruk()){
+      System.out.println("Bruker en reit.");
+      System.out.println(aktuellResept.hentReit() +" reit igjen.");
+    } else {
+      System.out.println("Reseten har ikke mer reit.\nVelg en annen.");
+      brukResept();
+    }
+
+
+
+  }
+
+  // public static void skrivStatistikk(){
+  //
+  // }
 
   public static void leggTilPasient(String navn, String persnr){
     Pasient nyPasient = new Pasient(navn, persnr);
@@ -255,14 +331,22 @@ public class Legesystem{
 
   public static void leggTilNarkoLegemiddel(String navn, double pris, double virkestoff, int styrke){
     Legemiddel nyttMiddel = new PreparatA(navn, pris, virkestoff, styrke);
+    legemiddelListe.leggTil(nyttMiddel);
+    totNarko ++;
+    System.out.println("La til" + nyttMiddel);
   }
 
   public static void leggTilVaneLegemiddel(String navn, double pris, double virkestoff, int styrke){
     Legemiddel nyttMiddel = new PreparatB(navn, pris, virkestoff, styrke);
+    legemiddelListe.leggTil(nyttMiddel);
+    totVane ++;
+    System.out.println("La til" + nyttMiddel);
   }
 
   public static void leggTilLegemiddel(String navn, double pris, double virkestoff){
     Legemiddel nyttMiddel = new PreparatC(navn, pris, virkestoff);
+    legemiddelListe.leggTil(nyttMiddel);
+    System.out.println("La til" + nyttMiddel);
   }
 
   public static void leggTilResept(int middelID, String legeNavn, int pasientID, int reit){
@@ -277,7 +361,6 @@ public class Legesystem{
       Resept nyResept = null;
       try {
         nyResept = aktuellLege.skrivResept(aktueltMiddel, aktuellPasient, reit);
-
         reseptListe.leggTil(nyResept);
       } catch (UlovligUtskrift e){
         e.getMessage();
@@ -358,7 +441,7 @@ public class Legesystem{
           innlest = scanner.nextLine();
 
           if(innlest.charAt(0) == '#'){
-            break;                          
+            break;
           }
 
           String[] innlestListe = innlest.split(", "); // Lagde selv.. Se neste blokk.
