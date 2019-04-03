@@ -11,15 +11,26 @@ public abstract class Rute {
     this.tilhorendeLab = lab;
     this.kolonne = kolonne;
     this.rad = rad;
-    this.naboNord = lab.hentRute(rad-1, kolonne);
-    this.naboSyd = lab.hentRute(rad+1, kolonne);
-    this.naboVest = lab.hentRute(rad, kolonne-1);
-    this.naboOst = lab.hentRute(rad, kolonne+1);
-    this.naboListe = new Rute[]{naboNord, naboSyd, naboVest, naboOst};
+    // this.naboNord = lab.hentRute(rad-1, kolonne);
+    // this.naboSyd = lab.hentRute(rad+1, kolonne);
+    // this.naboVest = lab.hentRute(rad, kolonne-1);
+    // this.naboOst = lab.hentRute(rad, kolonne+1);
+    // this.naboListe = new Rute[]{naboNord, naboSyd, naboVest, naboOst};
   }
 
   public Labyrint hentLab(){
     return tilhorendeLab;
+  }
+
+  public void settNabo(){
+    this.naboNord = tilhorendeLab.hentRute(rad-1, kolonne);
+    this.naboSyd = tilhorendeLab.hentRute(rad+1, kolonne);
+    this.naboVest = tilhorendeLab.hentRute(rad, kolonne-1);
+    this.naboOst = tilhorendeLab.hentRute(rad, kolonne+1);
+    this.naboListe = new Rute[]{naboNord, naboSyd, naboVest, naboOst};
+  }
+  public Rute[] hentNaboListe(){
+    return naboListe;
   }
 
   @Override

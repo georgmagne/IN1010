@@ -12,99 +12,87 @@ public class Labyrint {
     this.toDim = arr;
   }
 
-  public Rute hentRute(int rad, int kolonne){
-    System.out.println("["+rad+";"+kolonne+"]");
+  static Labyrint lesFraFil(File fil) throws java.io.FileNotFoundException{
+    Scanner leserFil = new Scanner(fil);
 
+    String forste = leserFil.nextLine();
+    String[] forsteArr = forste.split(" ");
+
+    int rader = Integer.valueOf(forsteArr[0]);
+    int kolonner = Integer.valueOf(forsteArr[1]);
+    Rute[][] nyRuteArr = new Rute[rader][kolonner];
+
+    Labyrint nyLab = new Labyrint(rader, kolonner, nyRuteArr);
+
+    Rute nyRute;
+    int radPos = 0;
+    while (leserFil.hasNextLine()){
+      int kolPos = 0;
+
+      String linje = leserFil.nextLine();
+      String[] linjeArr = linje.split("");
+
+      Rute[] nyRad = new Rute[kolonner];
+
+      for (String elem: linjeArr){
+        if (elem.equals(".")){
+          if (radPos == 0 || radPos == rader-1 || kolPos == 0 || kolPos == kolonner-1){ // Rute i kanten.
+            nyRute = new Aapning(nyLab, radPos, kolPos);
+          } else {
+            nyRute = new HvitRute(nyLab, radPos, kolPos);
+          }
+
+        } else if (elem.equals("#")){
+          nyRute = new SortRute(nyLab, radPos, kolPos);
+        }
+        else {
+          System.out.println("Det har skjedd noe feil.");
+          break;
+        }
+
+        nyRad[kolPos++] = nyRute;
+      }
+      nyRuteArr[radPos++] = nyRad;
+    }
+
+    // Går gjennom rutene og setter naboene.
+    for (Rute[] rad: nyLab.hentToDim()){
+      for (Rute elem: rad){
+        elem.settNabo();
+      }
+    }
+
+    return nyLab;
+  }
+
+  public Rute hentRute(int rad, int kolonne){
     if (rad < 0 || rad > this.rader-1){ // Utenfor toDim
-      System.out.println("Skip rad");
       return null;
     }
 
     if (kolonne < 0 || kolonne > this.kolonner-1){ // Utenfor toDim
-      System.out.println("Skip kolonne");
       return null;
     }
-
     return toDim[rad][kolonne];
-  }
-
-  private void leggTilRute(int rad, int kolonne, Rute nyRute){ // Legger til en Rute på gitt posisjon.
-    if (rad < 0 || rad > this.rader-1 || kolonne < 0 || kolonne > this.kolonner-1){
-      System.out.println("Utenfor arrayet.");
-      return;
-    }
-
-    if (toDim[rad][kolonne] != null){
-      System.out.println("Her er det allerede en Rute! ["+rad+";"+kolonne+"]");
-      System.out.println("Ruten blir overskrevet.");
-    }
-    toDim[rad][kolonne] = nyRute;
   }
 
   public Rute[][] hentToDim(){
     return this.toDim;
   }
 
+
+
+  @Override
   public String toString(){
-    String string = "";
+    String skriv = "";
 
     for (Rute[] rader: toDim){
       for (Rute elem: rader){
-        string += elem.tilTegn();
+        skriv = skriv + elem;
       }
-      string += "\n";
+      skriv = skriv +"\n";
     }
-
-    return string;
-  }
-
-  public void skrivUtLab(){
-    String skriv = "";
-    for (Rute[] rad: toDim){
-      for (Rute kol: rad){
-        skriv += kol;
-      }
-      skriv += "\n";
-    }
-    System.out.println("sasasasa");
-    System.out.println(skriv);
-  }
-
-  static Labyrint lesFraFil(File fil) throws java.io.FileNotFoundException{
-    Scanner leserFil = new Scanner(fil);
-
-    int rader = Integer.valueOf(leserFil.next());
-    int kolonner = Integer.valueOf(leserFil.next());
-    Rute[][] nyRuteArrr = new Rute[rader][kolonner];
-
-    Labyrint nyLab = new Labyrint(rader, kolonner, nyRuteArrr);
-
-    Rute nyRute;
-
-    int radPos = -1; // Variable for å holde styr raden Rutene skal legges til.
-    int kolPos = 0;
-
-    while (leserFil.hasNextLine()){
-      String linje = leserFil.nextLine();
-      String[] linjeArr = linje.split("");
-      radPos += 1;
-      kolPos = 0;
-
-      for (String elem: linjeArr){
-        if (elem.equals(".")){
-          nyRute = new HvitRute(nyLab, radPos, kolPos);
-          nyLab.leggTilRute(radPos, kolPos, nyRute);
-        }
-
-        if (elem.equals("#")){
-          nyRute = new SortRute(nyLab, radPos, kolPos);
-          nyLab.leggTilRute(radPos, kolPos, nyRute);
-        }
-
-        kolPos += 1;
-      }
-    }
-
-    return nyLab;
+    skriv = skriv + "Storrelse: ["+this.rader+";"+this.kolonner+"]";
+    return skriv;
   }
 }

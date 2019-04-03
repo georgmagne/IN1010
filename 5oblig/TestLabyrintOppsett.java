@@ -12,6 +12,18 @@ public class TestLabyrintOppsett {
       e.getMessage();
     }
 
-    labyrint.skrivUtLab();
+    System.out.println(labyrint);
+
+    for (Rute[] rad: labyrint.hentToDim()){
+      for (Rute rute: rad){
+        Rute[] naboer = rute.hentNaboListe();
+        System.out.println("Aktuell rute: [" + rute.rad + ";" + rute.kolonne+"]");
+        System.out.println("Nord: " + naboer[0]);
+        System.out.println("Syd: " + naboer[1]);
+        System.out.println("Vest: " + naboer[2]);
+        System.out.println("Ost: " + naboer[3]);
+        System.out.println();
+      }
+    }
   }
 }
