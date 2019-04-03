@@ -22,4 +22,8 @@ public abstract class Rute {
     return tilhorendeLab;
   }
 
+  @Override
+  public String toString(){
+    return String.valueOf(status);
+  }
 }
