@@ -88,11 +88,11 @@ public class Labyrint {
 
     for (Rute[] rader: toDim){
       for (Rute elem: rader){
-        skriv = skriv + elem;
+        skriv = skriv + String.valueOf(elem.tilTegn());
       }
       skriv = skriv +"\n";
     }
-    skriv = skriv + "Storrelse: ["+this.rader+";"+this.kolonner+"]";
+    skriv = skriv + "Storrelse: ["+this.rader+";"+this.kolonner+"]\n";
     return skriv;
   }
 }

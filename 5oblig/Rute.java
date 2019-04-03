@@ -33,8 +33,40 @@ public abstract class Rute {
     return naboListe;
   }
 
+  public void gaa(){
+    if (naboListe[0] == null || String.valueOf(naboListe[0].tilTegn()).equals("#")){
+      System.out.println("Kan ikke gå nord.");
+    } else {
+      System.out.println("Kan gå nord.");
+      naboListe[0].gaa();
+    }
+
+    if (naboListe[1] == null || String.valueOf(naboListe[1].tilTegn()).equals("#")){
+      System.out.println("Kan ikke gå syd.");
+    } else {
+      System.out.println("Kan gå syd.");
+      naboListe[1].gaa();
+    }
+
+    if (naboListe[2] == null || String.valueOf(naboListe[2].tilTegn()).equals("#")){
+      System.out.println("Kan ikke gå vest.");
+    } else {
+      System.out.println("Kan gå vest.");
+      naboListe[2].gaa();
+    }
+
+    if (naboListe[3] == null || String.valueOf(naboListe[3].tilTegn()).equals("#")){
+      System.out.println("Kan ikke gå ost.");
+    } else {
+      System.out.println("Kan gå ost.");
+      naboListe[3].gaa();
+    }
+
+  }
+
   @Override
   public String toString(){
-    return String.valueOf(status);
+    String skriv = "Rute: ["+rad+";"+kolonne+"] Status: " + String.valueOf(status) ;
+    return skriv;
   }
 }
