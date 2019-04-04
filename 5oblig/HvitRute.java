@@ -5,6 +5,20 @@ public class HvitRute extends Rute{
     super.status = '.';
   }
 
+  @Override
+  public void gaa(Rute forrige){
+    System.out.println("Jeg er her: "+this);
+    for (Rute nabo: naboListe){
+      if (nabo == forrige){
+        System.out.println("Der har jeg vært." + forrige);
+      } else {
+        System.out.println("Går til: " + nabo);
+        System.out.println();
+        nabo.gaa(this);
+      }
+    }
+  }
+
   public char tilTegn(){
     return super.status;
   }

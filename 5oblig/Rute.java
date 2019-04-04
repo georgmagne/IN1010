@@ -6,16 +6,12 @@ public abstract class Rute {
   protected char status;
 
   public abstract char tilTegn();
+  public abstract void gaa(Rute forrige);
 
   public Rute(Labyrint lab, int rad, int kolonne){
     this.tilhorendeLab = lab;
     this.kolonne = kolonne;
     this.rad = rad;
-    // this.naboNord = lab.hentRute(rad-1, kolonne);
-    // this.naboSyd = lab.hentRute(rad+1, kolonne);
-    // this.naboVest = lab.hentRute(rad, kolonne-1);
-    // this.naboOst = lab.hentRute(rad, kolonne+1);
-    // this.naboListe = new Rute[]{naboNord, naboSyd, naboVest, naboOst};
   }
 
   public Labyrint hentLab(){
@@ -33,48 +29,6 @@ public abstract class Rute {
     return naboListe;
   }
 
-  public void gaa(){
-    if (String.valueOf(this.status).equals("#")){
-      System.out.println("De befinner deg inni veggen!"+this);
-    }
-
-    if (naboListe[0] == null) {
-      System.out.println("Fant åpning " + this);
-    } else if (String.valueOf(naboListe[0].tilTegn()).equals("#")){
-      System.out.println("Kan ikke gå nord.");
-    } else {
-      System.out.println("Kan gå nord.");
-      naboListe[0].gaa();
-    }
-
-    if (naboListe[1] == null){
-      System.out.println("Fant åpning " + this);
-    } else if (String.valueOf(naboListe[1].tilTegn()).equals("#")){
-      System.out.println("Kan ikke gå syd.");
-    } else {
-      System.out.println("Kan gå syd.");
-      // naboListe[1].gaa();
-    }
-
-    if (naboListe[2] == null){
-      System.out.println("Fant åpning " + this);
-    } else if (String.valueOf(naboListe[2].tilTegn()).equals("#")){
-      System.out.println("Kan ikke gå vest.");
-    } else {
-      System.out.println("Kan gå vest.");
-      // naboListe[2].gaa();
-    }
-
-    if (naboListe[3] == null){
-      System.out.println("Fant åpning " + this);
-    } else if (String.valueOf(naboListe[3].tilTegn()).equals("#")){
-      System.out.println("Kan ikke gå ost.");
-    } else {
-      System.out.println("Kan gå ost.");
-      naboListe[3].gaa();
-    }
-
-  }
 
   @Override
   public String toString(){
