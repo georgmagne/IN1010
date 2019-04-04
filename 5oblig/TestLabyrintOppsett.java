@@ -25,5 +25,8 @@ public class TestLabyrintOppsett {
         System.out.println();
       }
     }
+
+    Rute sjekk = labyrint.hentRute(1, 1);
+    sjekk.gaa();
   }
 }

@@ -34,28 +34,40 @@ public abstract class Rute {
   }
 
   public void gaa(){
-    if (naboListe[0] == null || String.valueOf(naboListe[0].tilTegn()).equals("#")){
+    if (String.valueOf(this.status).equals("#")){
+      System.out.println("De befinner deg inni veggen!"+this);
+    }
+
+    if (naboListe[0] == null) {
+      System.out.println("Fant åpning " + this);
+    } else if (String.valueOf(naboListe[0].tilTegn()).equals("#")){
       System.out.println("Kan ikke gå nord.");
     } else {
       System.out.println("Kan gå nord.");
       naboListe[0].gaa();
     }
 
-    if (naboListe[1] == null || String.valueOf(naboListe[1].tilTegn()).equals("#")){
+    if (naboListe[1] == null){
+      System.out.println("Fant åpning " + this);
+    } else if (String.valueOf(naboListe[1].tilTegn()).equals("#")){
       System.out.println("Kan ikke gå syd.");
     } else {
       System.out.println("Kan gå syd.");
-      naboListe[1].gaa();
+      // naboListe[1].gaa();
     }
 
-    if (naboListe[2] == null || String.valueOf(naboListe[2].tilTegn()).equals("#")){
+    if (naboListe[2] == null){
+      System.out.println("Fant åpning " + this);
+    } else if (String.valueOf(naboListe[2].tilTegn()).equals("#")){
       System.out.println("Kan ikke gå vest.");
     } else {
       System.out.println("Kan gå vest.");
-      naboListe[2].gaa();
+      // naboListe[2].gaa();
     }
 
-    if (naboListe[3] == null || String.valueOf(naboListe[3].tilTegn()).equals("#")){
+    if (naboListe[3] == null){
+      System.out.println("Fant åpning " + this);
+    } else if (String.valueOf(naboListe[3].tilTegn()).equals("#")){
       System.out.println("Kan ikke gå ost.");
     } else {
       System.out.println("Kan gå ost.");
