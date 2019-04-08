@@ -10,9 +10,12 @@ public class HvitRute extends Rute{
     System.out.println("Jeg er her: "+this);
     for (Rute nabo: naboListe){
       if (nabo == forrige){
+        System.out.println("Jeg er: " + this);
         System.out.println("Der har jeg vært." + forrige);
       } else {
+        System.out.println("Går fra: " + this);
         System.out.println("Går til: " + nabo);
+        besokt.add(this);
         System.out.println();
         nabo.gaa(this);
       }

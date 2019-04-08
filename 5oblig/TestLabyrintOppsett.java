@@ -6,7 +6,7 @@ public class TestLabyrintOppsett {
     Labyrint labyrint = null;
 
     try{
-      File fil = new File("labyrinter/1.in");
+      File fil = new File("labyrinter/7.in");
       labyrint = labyrint.lesFraFil(fil);
     } catch (java.io.FileNotFoundException e) {
       e.getMessage();
@@ -27,7 +27,8 @@ public class TestLabyrintOppsett {
     }
 
     System.out.println("Begynner å gå!");
-    Rute sjekk = labyrint.hentRute(1, 1);
-    sjekk.gaa(sjekk);
+    Rute sjekk = labyrint.hentRute(2, 1);
+    // sjekk.gaa(sjekk);
+    sjekk.finnUtvei();
   }
 }
