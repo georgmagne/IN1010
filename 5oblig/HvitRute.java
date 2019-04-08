@@ -16,7 +16,7 @@ public class HvitRute extends Rute{
         System.out.println("Går fra: " + this);
         System.out.println("Går til: " + nabo);
         besokt.add(this);
-        System.out.println();
+        // System.out.println();
         nabo.gaa(this);
       }
     }

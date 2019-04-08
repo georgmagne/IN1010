@@ -27,6 +27,21 @@ public abstract class Rute {
     return tilhorendeLab;
   }
 
+  public int hentRad(){
+    return this.rad;
+  }
+
+  public int hentKol(){
+    return this.kolonne;
+  }
+
+  public int hentAntUtveier(){
+    return this.utveier;
+  }
+
+  public ArrayList<ArrayList<Rute>> hentUtveier(){
+    return ruteneIngenDups;
+  }
   public void settNabo(){
     this.naboNord = tilhorendeLab.hentRute(rad-1, kolonne);
     this.naboSyd = tilhorendeLab.hentRute(rad+1, kolonne);
@@ -39,7 +54,20 @@ public abstract class Rute {
     return naboListe;
   }
 
+  private void reset(){
+    besokt = new ArrayList<Rute>(); // Holder rede på alle besokte ruter, etter at en aapning har blitt besokt.
+    rutene = new ArrayList<ArrayList<Rute>>(); // Holder rede på hver enkelt utveurute, men med duplikatRuter. En liste er en utvei.
+    ruteneIngenDups = new ArrayList<ArrayList<Rute>>(); // Holder rede på utveirute, uten duplikatRuter. En liste er en utvei.
+    utveier = 0; // Teller for antall utveier.
+
+  }
+
   public void finnUtvei(){
+    // // besokt = new ArrayList<Rute>();
+    // utveier = 0;
+    // rutene = new ArrayList<ArrayList<Rute>>();
+    // ruteneIngenDups = new ArrayList<ArrayList<Rute>>();
+    reset();
     this.gaa(this);
 
     // Fjerner duplikatruter og lager en ny ArrayList
@@ -77,11 +105,7 @@ public abstract class Rute {
         System.out.println(rute);
       }
     }
-
-    System.out.println("Antall utveier: " + utveier);
   }
-
-  
 
   @Override
   public String toString(){

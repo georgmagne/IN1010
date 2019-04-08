@@ -6,13 +6,15 @@ public class TestLabyrintOppsett {
     Labyrint labyrint = null;
 
     try{
-      File fil = new File("labyrinter/7.in");
+      File fil = new File("labyrinter/4.in");
       labyrint = labyrint.lesFraFil(fil);
     } catch (java.io.FileNotFoundException e) {
       e.getMessage();
     }
 
     System.out.println(labyrint);
+    System.out.println("Aller koordinater er på formen:");
+    System.out.println("[RAD;KOLONNE]");
 
     for (Rute[] rad: labyrint.hentToDim()){
       for (Rute rute: rad){
@@ -26,9 +28,49 @@ public class TestLabyrintOppsett {
       }
     }
 
-    System.out.println("Begynner å gå!");
-    Rute sjekk = labyrint.hentRute(2, 1);
+    // System.out.println("Begynner å gå!");
+    // Rute sjekk = labyrint.hentRute(0, 9);
     // sjekk.gaa(sjekk);
-    sjekk.finnUtvei();
+    // sjekk.finnUtvei();
+
+    Liste<String> utvei = labyrint.finnUtveiFra(22,7);
+    // System.out.println(utvei);
+    // System.out.println(utvei.hent(0));
+    // System.out.println(utvei.hent(1));
+    System.out.println("\nUtvei fra: " + labyrint.hentRute(22,7));
+    for (String vei: utvei){
+      System.out.println(vei);
+    }
+
+    // utvei = labyrint.finnUtveiFra(3,1);
+
+    // System.out.println("\nUtvei fra: " + labyrint.hentRute(3,1));
+    // for (String vei: utvei){
+    //   System.out.println(vei);
+    // }
+    //
+    //
+    // utvei = labyrint.finnUtveiFra(3,3);
+    //
+    // System.out.println("\nUtvei fra: " + labyrint.hentRute(3,3));
+    // for (String vei: utvei){
+    //   System.out.println(vei);
+    // }
+    //
+    // utvei = labyrint.finnUtveiFra(3,4);
+    //
+    // System.out.println("\nUtvei fra: " + labyrint.hentRute(3,4));
+    // for (String vei: utvei){
+    //   System.out.println(vei);
+    // }
+    //
+    //
+    // utvei = labyrint.finnUtveiFra(0,1);
+    //
+    // System.out.println("\nUtvei fra: " + labyrint.hentRute(0,1));
+    // for (String vei: utvei){
+    //   System.out.println(vei);
+    // }
+
   }
 }

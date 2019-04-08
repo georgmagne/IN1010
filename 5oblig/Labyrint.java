@@ -1,5 +1,7 @@
 import java.io.File;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Labyrint {
@@ -80,6 +82,28 @@ public class Labyrint {
     return this.toDim;
   }
 
+  // Indekserer rutene (rad, kolonne), ikke (kolonne, rad) som spesifisert noen steder i oppgaveteksten.
+  // Velger derfor å holde meg til dette i signaturen til denne metoden også.
+  public Liste<String> finnUtveiFra(int rad, int kol){
+    Rute skalSjekke = this.hentRute(rad, kol);
+    skalSjekke.finnUtvei();
+    Liste<String> utveiListe = new SortertLenkeliste<>();
+
+    utveiListe.leggTil("Antall utveier: " + String.valueOf(skalSjekke.hentAntUtveier())); // Første element i lenkelisten sier hvor mange utveier det er.
+    //Lager String-er av Rute objektene ruteneIngenDups, som holder rede på alle utveiene.
+    for (ArrayList<Rute> enUtveiListe: skalSjekke.hentUtveier()){
+      String enUtvei = "";
+      int antallSteg = 0;
+      for (Rute rute: enUtveiListe){
+        enUtvei = enUtvei + "[" + String.valueOf(rute.hentRad()) + ";" + String.valueOf(rute.hentKol()) + "] --> ";
+        antallSteg ++;
+      }
+      enUtvei = "Denne utveien har " + String.valueOf(antallSteg) + " antall steg " + enUtvei + "Ute!";
+      utveiListe.leggTil(enUtvei);
+    }
+    return utveiListe;
+
+  }
 
 
   @Override
