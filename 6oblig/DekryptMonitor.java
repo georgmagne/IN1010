@@ -2,12 +2,14 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
+import java.util.NoSuchElementException;
 
 public class DekryptMonitor {
   LinkedList<Melding> meldinger;
   int antMeldinger = 0;
   Lock laas = new ReentrantLock();
   Condition ikkeTomt = laas.newCondition();
+  public boolean ferdigMedDekrypt = false;
 
 
   public DekryptMonitor(){
@@ -29,20 +31,30 @@ public class DekryptMonitor {
 
   public Melding taUtMelding(){
     laas.lock();
-
     try{
-      while (antMeldinger == 0){
+      while (meldinger.size() == 0){
+        if(ferdigMedDekrypt){
+          break;
+        }
         System.out.println("her er jeg");
         ikkeTomt.await();
       }
 
       antMeldinger--;
-      Melding taUt = meldinger.removeFirst();
-      System.out.println("Tar ut: " + taUt);
+      try{
+        Melding taUt = meldinger.removeFirst();
+        return taUt;
 
-      return taUt;
+      } catch (NoSuchElementException e1){
+        System.out.println("nooo");
+      }
+      // System.out.println("Tar ut: " + i);
+      // i++;
+
     } catch (InterruptedException e){
 
+    // } catch (NoSuchElementException e1){
+    //   System.out.println("Ferdig!");
     } finally {
       laas.unlock();
     }

@@ -18,7 +18,7 @@ public class Kryptograf implements Runnable {
         running = false;
         System.out.println("Avslutter" + this);
       } else{
-        System.out.println("Jeg er her!!!!!");
+        // System.out.println("Jeg er her!!!!!");
         String kryptertMelding = skalDekryptes.hentKryptertInnhold();
         String dekryptertMelding = Kryptografi.dekrypter(kryptertMelding);
 

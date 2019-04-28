@@ -1,17 +1,20 @@
 public class Melding{
-  private String dekryptertInnhold;
+  public String dekryptertInnhold;
   private String kryptertInnhold;
   private int sekvensnummer;
   private int kanalId;
+  public boolean dekryptert;
 
   public Melding(String innhold, int kanalId, int sekvensnummer){
     this.kryptertInnhold = innhold;
     this.kanalId = kanalId;
     this.sekvensnummer = sekvensnummer;
+    this.dekryptert = false;
   }
 
   public void dekrypt(String nyttInnhold){
     this.dekryptertInnhold = nyttInnhold;
+    this.dekryptert = true;
   }
 
   public String hentDekryptertInnhold(){

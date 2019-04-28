@@ -31,7 +31,7 @@ public class KryptMonitor {
   public Melding taUtMelding(){
     laas.lock();
     try {
-      while (antMeldinger == 0){
+      while (meldinger.size() == 0){
         if(ferdigMedLytting){
           break;
         }

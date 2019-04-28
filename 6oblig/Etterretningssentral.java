@@ -8,6 +8,7 @@ public class Etterretningssentral {
 
     int antDekryptMelding = 0;
     int antKryptMelding = 0;
+    int antMeldinger = 0;
 
     Operasjonssentral ops = new Operasjonssentral(antallTelegrafister);
     Kanal[] kanaler = ops.hentKanalArray();
@@ -21,6 +22,11 @@ public class Etterretningssentral {
       new Thread(lyttejobb).start();
     }
 
+    // for (int i = 0; i < antallKryptografer; i++){ // Oppretter kryptografer.
+    //   Runnable dekryptering = new Kryptograf(kryptMonitor, dekryptMonitor);
+    //   new Thread(dekryptering).start();
+    // }
+
     try{
       System.out.println("Main sover i 7.5sek");
       Thread.sleep(7500);
@@ -30,10 +36,10 @@ public class Etterretningssentral {
     // LinkedList<Melding> meldinger = kryptMonitor.hentMeldinger();
 
     // int antKryptMelding = 0;
-    for (Melding elem: kryptMonitor.hentMeldinger()){
-      System.out.println(elem);
-      antKryptMelding++;
-    }
+    // for (Melding elem: kryptMonitor.hentMeldinger()){
+    //   System.out.println(elem);
+    //   antKryptMelding++;
+    // }
     System.out.println("Ferdig med å skrive kryptertMeldinger\n");
     System.out.println("tot: " + antKryptMelding);
     kryptMonitor.ferdigMedLytting = true;
@@ -43,7 +49,7 @@ public class Etterretningssentral {
       new Thread(dekryptering).start();
     }
 
-    LinkedList<Melding> dekrypterteMeldinger = dekryptMonitor.hentMeldinger();
+    // LinkedList<Melding> dekrypterteMeldinger = dekryptMonitor.hentMeldinger();
 
     try{
       System.out.println("Main sover i 20sek");
@@ -51,14 +57,22 @@ public class Etterretningssentral {
     } catch (InterruptedException e){
       System.out.println("fak");
     }
+    dekryptMonitor.ferdigMedDekrypt = true;
 
     // int antDekryptMelding = 0;
-    for (Melding elem: dekrypterteMeldinger){
+    for (Melding elem: dekryptMonitor.hentMeldinger()){
       System.out.println(elem);
-      antDekryptMelding++;
+      if (elem.dekryptert){
+        antDekryptMelding++;
+      }
+      antMeldinger++;
+
     }
     System.out.println("Skrevet ut meldingene");
-    System.out.println("Det er : " + antKryptMelding + "stk kryptertMeldinger");
+    System.out.println("Det er : " + antMeldinger + "stk kryptertMeldinger");
     System.out.println("Det er: " + antDekryptMelding + "stk dekryptmeldinger.") ;
+
+    Runnable opleder = new Operasjonsleder(dekryptMonitor, antallTelegrafister);
+    new Thread(opleder).start();
   }
 }
