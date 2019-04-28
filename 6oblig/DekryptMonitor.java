@@ -47,4 +47,8 @@ public class DekryptMonitor {
     return null; // Tomt for meldinger.
   }
 
+  public LinkedList<Melding> hentMeldinger(){
+    return this.meldinger;
+  }
+
 }

@@ -11,18 +11,22 @@ public class Kryptograf implements Runnable {
 
   @Override
   public void run(){
-    System.out.println("Starter i dekryptere: ");
+    System.out.println("Starter å dekryptere: ");
     while (running){
       Melding skalDekryptes = hentFra.taUtMelding();
       if(skalDekryptes == null){
         running = false;
+        System.out.println("Avslutter" + this);
       } else{
+        System.out.println("Jeg er her!!!!!");
         String kryptertMelding = skalDekryptes.hentKryptertInnhold();
         String dekryptertMelding = Kryptografi.dekrypter(kryptertMelding);
 
         skalDekryptes.dekrypt(dekryptertMelding);
 
         giTil.leggTilMelding(skalDekryptes);
+        System.out.println("Dekryptert:");
+        System.out.println(skalDekryptes);
       }
     }
 
