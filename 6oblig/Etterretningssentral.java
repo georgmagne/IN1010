@@ -6,6 +6,9 @@ public class Etterretningssentral {
     int antallTelegrafister = 3;
     int antallKryptografer = 20;
 
+    int antDekryptMelding = 0;
+    int antKryptMelding = 0;
+
     Operasjonssentral ops = new Operasjonssentral(antallTelegrafister);
     Kanal[] kanaler = ops.hentKanalArray();
     System.out.println("Antall kanaler: " + kanaler.length);
@@ -19,16 +22,21 @@ public class Etterretningssentral {
     }
 
     try{
-      System.out.println("Main sover i 10sek");
-      Thread.sleep(10000);
+      System.out.println("Main sover i 7.5sek");
+      Thread.sleep(7500);
     } catch (InterruptedException e){
       System.out.println("fak");
     }
     // LinkedList<Melding> meldinger = kryptMonitor.hentMeldinger();
 
+    // int antKryptMelding = 0;
     for (Melding elem: kryptMonitor.hentMeldinger()){
       System.out.println(elem);
+      antKryptMelding++;
     }
+    System.out.println("Ferdig med å skrive kryptertMeldinger\n");
+    System.out.println("tot: " + antKryptMelding);
+    kryptMonitor.ferdigMedLytting = true;
 
     for (int i = 0; i < antallKryptografer; i++){ // Oppretter kryptografer.
       Runnable dekryptering = new Kryptograf(kryptMonitor, dekryptMonitor);
@@ -44,8 +52,13 @@ public class Etterretningssentral {
       System.out.println("fak");
     }
 
+    // int antDekryptMelding = 0;
     for (Melding elem: dekrypterteMeldinger){
       System.out.println(elem);
+      antDekryptMelding++;
     }
+    System.out.println("Skrevet ut meldingene");
+    System.out.println("Det er : " + antKryptMelding + "stk kryptertMeldinger");
+    System.out.println("Det er: " + antDekryptMelding + "stk dekryptmeldinger.") ;
   }
 }

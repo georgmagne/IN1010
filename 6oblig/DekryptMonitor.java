@@ -32,12 +32,15 @@ public class DekryptMonitor {
 
     try{
       while (antMeldinger == 0){
+        System.out.println("her er jeg");
         ikkeTomt.await();
       }
 
       antMeldinger--;
       Melding taUt = meldinger.removeFirst();
+      System.out.println("Tar ut: " + taUt);
 
+      return taUt;
     } catch (InterruptedException e){
 
     } finally {

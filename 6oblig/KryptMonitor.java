@@ -7,6 +7,7 @@ import java.util.concurrent.locks.Condition;
 public class KryptMonitor {
   LinkedList<Melding> meldinger;
   int antMeldinger = 0;
+  public boolean ferdigMedLytting = false;
 
   Lock laas = new ReentrantLock();
   Condition ikkeTomt = laas.newCondition();
@@ -31,12 +32,18 @@ public class KryptMonitor {
     laas.lock();
     try {
       while (antMeldinger == 0){
+        if(ferdigMedLytting){
+          break;
+        }
         ikkeTomt.await();
       }
+      System.out.println("jeg er her");
       antMeldinger--;
       Melding skalDekryptes = meldinger.removeFirst();
+      return skalDekryptes;
 
     } catch (InterruptedException e) {
+      System.out.println("neo feil skjedde");
     } finally {
       laas.unlock();
     }
