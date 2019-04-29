@@ -85,5 +85,7 @@ public class Operasjonsleder implements Runnable{
         e.printStackTrace();
       }
     }
+
+    System.exit(0);
   }
 }

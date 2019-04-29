@@ -27,12 +27,12 @@ public class Etterretningssentral {
     //   new Thread(dekryptering).start();
     // }
 
-    try{
-      System.out.println("Main sover i 7.5sek");
-      Thread.sleep(7500);
-    } catch (InterruptedException e){
-      System.out.println("fak");
-    }
+    // try{
+    //   System.out.println("Main sover i 7.5sek");
+    //   Thread.sleep(7500);
+    // } catch (InterruptedException e){
+    //   System.out.println("fak");
+    // }
     // LinkedList<Melding> meldinger = kryptMonitor.hentMeldinger();
 
     // int antKryptMelding = 0;
@@ -40,9 +40,9 @@ public class Etterretningssentral {
     //   System.out.println(elem);
     //   antKryptMelding++;
     // }
-    System.out.println("Ferdig med å skrive kryptertMeldinger\n");
-    System.out.println("tot: " + antKryptMelding);
-    kryptMonitor.ferdigMedLytting = true;
+    // System.out.println("Ferdig med å skrive kryptertMeldinger\n");
+    // System.out.println("tot: " + antKryptMelding);
+    // kryptMonitor.ferdigMedLytting = true;
 
     for (int i = 0; i < antallKryptografer; i++){ // Oppretter kryptografer.
       Runnable dekryptering = new Kryptograf(kryptMonitor, dekryptMonitor);
@@ -74,5 +74,6 @@ public class Etterretningssentral {
 
     Runnable opleder = new Operasjonsleder(dekryptMonitor, antallTelegrafister);
     new Thread(opleder).start();
+    // System.exit(0);
   }
 }
