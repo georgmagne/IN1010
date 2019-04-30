@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.concurrent.CountDownLatch;
 
 public class Operasjonsleder implements Runnable{
 
@@ -11,15 +12,16 @@ public class Operasjonsleder implements Runnable{
   int antKanaler;
   LinkedList<Melding> meldinger;
   boolean running = true;
+  CountDownLatch latchOpleder;
   ArrayList<ArrayList<Melding>> meldingSamling = new ArrayList<ArrayList<Melding>>();
-  // ArrayList<ArrayList<Melding>> meldingSamlingSortert = new ArrayList<ArrayList<Melding>>();
   ArrayList<Melding[]> meldingSamlingSortert = new ArrayList<Melding[]>();
 
 
-  public Operasjonsleder(DekryptMonitor hentFra, int antKanaler){
+  public Operasjonsleder(DekryptMonitor hentFra, int antKanaler, CountDownLatch latchOpleder){
     this.hentFra = hentFra;
     this.antKanaler = antKanaler;
     this.meldinger = hentFra.hentMeldinger();
+    this.latchOpleder = latchOpleder;
 
     for (int i = 0; i < antKanaler; i++){
       ArrayList<Melding> nyListe = new ArrayList<>();
@@ -40,8 +42,7 @@ public class Operasjonsleder implements Runnable{
       }
     }
 
-    // Melding[] nyttArray;
-
+    // Oppretter 2d Arraylist/Array beholder til de sorterte meldingene.
     for (ArrayList<Melding> kanal: meldingSamling){
       int lengde = kanal.size();
       Melding[] nyttArray = new Melding[lengde];
@@ -52,15 +53,16 @@ public class Operasjonsleder implements Runnable{
       meldingSamlingSortert.add(nyttArray);
     }
 
-    for (Melding[] kanal: meldingSamlingSortert){
-      System.out.println("Ny kanal!");
-      for (Melding melding: kanal){
-        System.out.println(melding);
-      }
-      System.out.println("Ferdig med en kanal");
-    }
+    // Skriver ut alle sorterte meldingene.
+    // for (Melding[] kanal: meldingSamlingSortert){
+    //   System.out.println("Ny kanal!");
+    //   for (Melding melding: kanal){
+    //     System.out.println(melding);
+    //   }
+    //   System.out.println("Ferdig med en kanal");
+    // }
 
-
+    // Oppretter filer til kanalene og legger de tilhørende meldingene til filen.
     for (Melding[] kanal: meldingSamlingSortert){
       String filnavn = "kanal" + kanal[0].hentId() + ".txt";
       System.out.println(filnavn);
@@ -68,24 +70,23 @@ public class Operasjonsleder implements Runnable{
       try {
         File fil = new File(filnavn);
 
-        if (!fil.exists()){
-          fil.createNewFile();
+        if (!fil.exists()){ // Lager filen, hvis den ikke finnes fra før.
+          fil.createNewFile(); // Hvis den fins, blir den bare overskrevet senere.
         }
 
         PrintWriter writer = new PrintWriter(fil, "utf-8");
 
-        for (int i = 0; i < kanal.length; i++){
-          writer.println(kanal[i].hentDekryptertInnhold());
+        for (int i = 0; i < kanal.length; i++){ // Går gjennom Melding[], som er beholderen for meldginer fra en gitt kanal.
+          writer.println(kanal[i].hentDekryptertInnhold()); // legger det til filen.
           writer.println();
           writer.println();
         }
 
-        writer.close();
+        writer.close(); // lukker filen.
       } catch (IOException e){
         e.printStackTrace();
       }
     }
-
-    System.exit(0);
+    latchOpleder.countDown();
   }
 }

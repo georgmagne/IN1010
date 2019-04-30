@@ -2,11 +2,12 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
+import java.util.NoSuchElementException;
+
 
 
 public class KryptMonitor {
   LinkedList<Melding> meldinger;
-  int antMeldinger = 0;
   public boolean ferdigMedLytting = false;
 
   Lock laas = new ReentrantLock();
@@ -20,7 +21,6 @@ public class KryptMonitor {
     laas.lock();
     try {
       meldinger.add(melding);
-      antMeldinger++;
       ikkeTomt.signalAll();
     } finally {
       laas.unlock();
@@ -33,17 +33,18 @@ public class KryptMonitor {
     try {
       while (meldinger.size() == 0){
         if(ferdigMedLytting){
-          break;
+          return null;
         }
         ikkeTomt.await();
       }
-      System.out.println("jeg er her");
-      antMeldinger--;
-      Melding skalDekryptes = meldinger.removeFirst();
-      return skalDekryptes;
+      try {
+        Melding skalDekryptes = meldinger.removeFirst();
+        return skalDekryptes;
+      } catch (NoSuchElementException e){
+        System.out.println("Feil i kryptMonitor");
+      }
 
     } catch (InterruptedException e) {
-      System.out.println("neo feil skjedde");
     } finally {
       laas.unlock();
     }

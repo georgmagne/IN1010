@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 
 public class DekryptMonitor {
   LinkedList<Melding> meldinger;
-  int antMeldinger = 0;
   Lock laas = new ReentrantLock();
   Condition ikkeTomt = laas.newCondition();
   public boolean ferdigMedDekrypt = false;
@@ -21,7 +20,6 @@ public class DekryptMonitor {
 
     try{
       meldinger.add(melding);
-      antMeldinger++;
       ikkeTomt.signalAll();
 
     } finally {
@@ -34,27 +32,22 @@ public class DekryptMonitor {
     try{
       while (meldinger.size() == 0){
         if(ferdigMedDekrypt){
+          System.out.println("Går ut");
           break;
         }
-        System.out.println("her er jeg");
         ikkeTomt.await();
       }
 
-      antMeldinger--;
       try{
         Melding taUt = meldinger.removeFirst();
         return taUt;
 
       } catch (NoSuchElementException e1){
-        System.out.println("nooo");
+        // System.out.println("Feil i dekryptMonitor");
       }
-      // System.out.println("Tar ut: " + i);
-      // i++;
 
     } catch (InterruptedException e){
 
-    // } catch (NoSuchElementException e1){
-    //   System.out.println("Ferdig!");
     } finally {
       laas.unlock();
     }

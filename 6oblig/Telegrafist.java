@@ -1,3 +1,5 @@
+import java.util.concurrent.CountDownLatch;
+
 public class Telegrafist implements Runnable{
 
   private Kanal kanal;
@@ -5,12 +7,14 @@ public class Telegrafist implements Runnable{
   private int antMottattMelding;
   private KryptMonitor rapportererTil;
   private boolean running = true;
+  private CountDownLatch latchTelegraf;
 
-  public Telegrafist(Kanal kanal, KryptMonitor sjef){
+  public Telegrafist(Kanal kanal, KryptMonitor sjef, CountDownLatch latchTelegraf){
     this.kanal = kanal;
     this.kanalId = kanal.hentId();
     this.rapportererTil = sjef;
     this.antMottattMelding = 0;
+    this.latchTelegraf = latchTelegraf;
   }
 
   @Override
@@ -29,6 +33,8 @@ public class Telegrafist implements Runnable{
         rapportererTil.leggTilMelding(nyMelding);
       }
     }
+
+    latchTelegraf.countDown();
     System.out.println("Ferdig med å lytte. Avslutter avlytting på kanal: " + this.kanalId);
   }
 }
