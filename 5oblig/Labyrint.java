@@ -95,7 +95,7 @@ public class Labyrint {
       String enUtvei = "";
       int antallSteg = 0;
       for (Rute rute: enUtveiListe){
-        enUtvei = enUtvei + "[" + String.valueOf(rute.hentRad()) + ";" + String.valueOf(rute.hentKol()) + "] --> ";
+        enUtvei = enUtvei + "(" + String.valueOf(rute.hentRad()) + "," + String.valueOf(rute.hentKol()) + ") --> ";
         antallSteg ++;
       }
       enUtvei = "Denne utveien har " + String.valueOf(antallSteg) + " antall steg " + enUtvei + "Ute!";
