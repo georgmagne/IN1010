@@ -87,7 +87,7 @@ public class Etterretningssentral {
 
     try{
       latchOpleder.await();
-      System.exit(1);
+      // System.exit(1);
     } catch (Exception e){
       e.printStackTrace();
     }
